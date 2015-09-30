@@ -1,5 +1,9 @@
 
 Recherches des logiciels pour mindstorm:
 
-	   NXT 2.0 ????
+	   NXT 2.0, lejos ou ev3 ????
 Faut il un logiciel de simulation, emulateur ou logiciel pour programmer en mindstorm ??
+
+Message :Rick est le pseudo de mon pc personnel 
+
+choix en cours de décision concernant le langage que nous allons utiliser c, c++ ou java.
