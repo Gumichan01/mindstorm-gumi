@@ -6,3 +6,20 @@ Liste des outils candidats:
 
  - LeJOS > http://www.lejos.org/
  - BricxCC > http://bricxcc.sourceforge.net/
+ 
+
+Outil sélectionné: LeJOS
+
+
+Programme Hello Wolrd fait !
+
+== TODO == 
+
+A venir...
+
+
+
+== Documentations == 
+
+ - [Connexion vers le cerveau] (https://github.com/ev3dev/ev3dev/wiki/Setting-Up-Windows-USB-Ethernet-Networking)
+ - [API EV3] (http://www.lejos.org/ev3/docs/)
