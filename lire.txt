@@ -1,4 +1,4 @@
+cerveau du mindstorm detecté par l'ordinateur,
 
-Eclispe installé.
-Lejos ev3 plugin installer
-hello world fait.
+hello world effectué
+moteur aussi 
