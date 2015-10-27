@@ -22,19 +22,19 @@ public class ColorDetection {
 
 		// Créer le capteur
 		EV3ColorSensor sensor = new EV3ColorSensor(port);
-		SampleProvider color_sample = sensor.getRGBMode();
-		SampleProvider light_sample = sensor.getAmbientMode();
+		SampleProvider color_sample_provider = sensor.getRGBMode();
+		SampleProvider light_sample_provider = sensor.getAmbientMode();
 
 		int n = 32;
 		int i = 0;
 		
 		// Detection de couleur
-		float [] sample = new float[color_sample.sampleSize()];
+		float [] sample = new float[color_sample_provider.sampleSize()];
 
 		while(i < n)
 		{
 			Delay.msDelay(500);
-			color_sample.fetchSample(sample, 0);
+			color_sample_provider.fetchSample(sample, 0);
 			System.out.println(Arrays.toString(sample));
 			
 			DisplayIfBlack(sample);
@@ -48,14 +48,17 @@ public class ColorDetection {
 		i = 0;	// Reset the counter
 		
 		// Detection de lumiere
-		sample = new float[light_sample.sampleSize()];
+		sample = new float[light_sample_provider.sampleSize()];
 
 		while(i < n)
 		{
-			light_sample.fetchSample(sample, 0);
+			light_sample_provider.fetchSample(sample, 0);
 			Delay.msDelay(500);
 
 			System.out.println("Light : " + Arrays.toString(sample));
+			
+			DisplayIfNoLight(sample);
+			
 			i++;
 		}		
 		
@@ -66,9 +69,9 @@ public class ColorDetection {
 
 	
 	// If the value of all channels is 0, then the color is black
-	static public void DisplayIfBlack(float [] sample){
+	static public void DisplayIfBlack(float [] color_sample){
 		
-		for(float f : sample)
+		for(float f : color_sample)
 		{
 			// Not black, get out of the function!
 			if(f != 0.0)
@@ -82,9 +85,9 @@ public class ColorDetection {
 	
 	// IF the value of all channels is above a certain value
 	// we consider this color as white
-	static public void DisplayIfWhite(float [] sample){
+	static public void DisplayIfWhite(float [] color_sample){
 		
-		for(float f : sample)
+		for(float f : color_sample)
 		{
 			// Not black, get out of the function!
 			if(f < WHITE_MIN_VALUE)
@@ -92,6 +95,19 @@ public class ColorDetection {
 		}
 		
 		String s = "White color ";
+		System.out.println(s);
+	}
+	
+	// Display a sentence if there is no light 
+	static public void DisplayIfNoLight(float [] light_sample){
+		
+		for(float f : light_sample)
+		{
+			if(f != 0.0)
+				return;
+		}
+		
+		String s = "No light";
 		System.out.println(s);
 	}
 	
