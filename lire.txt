@@ -1,0 +1,8 @@
+cerveau du mindstorm detecté par l'ordinateur,
+
+hello world effectué
+moteur aussi
+
+le robot mindstorm est en cours de montage
+le mail concernant la spécification est lu
+commencement du travail pour le detecteur de couleur
