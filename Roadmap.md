@@ -29,4 +29,3 @@ A venir...
  - le fichier lire.txt est supprimé, on ne sert que de celui ci
  - le capteur de couleur est testé, l'étalonnage est en cours
  - la specification partielle est en cours
- - modification du programme pour faire tourner les moteurs
