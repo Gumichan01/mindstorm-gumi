@@ -18,30 +18,32 @@ import lejos.utility.Delay;
 
 
 public class Hello{
-	
-	private static RegulatedMotor motor;
+
+	private static RegulatedMotor motor,motor2;
 
 	public static void main(String [] args){
-		
+
 		// Recupère l'adresse du cerveau
 		EV3 ev3 = (EV3) BrickFinder.getLocal();
-		
+
 		motor = new EV3LargeRegulatedMotor(MotorPort.A);
-		
+		motor2 = new EV3LargeRegulatedMotor(MotorPort.D);
+		//pour le deuxième moteur brancher sur le port D du cerveau
 		TextLCD lcd = ev3.getTextLCD();
-		
+
 		// On met le texte sur l'écran LCD
 		lcd.drawString("Hello World!", 4, 4);
 		//Sound.beep();
 		Delay.msDelay(1000);
-		
+
 		// Rotation
 		motor.rotate(720);
+		motor2.rotate(720);
 		Delay.msDelay(2000);
 
-		
-		
-		
+
+
+
 	}
-	
+
 }
