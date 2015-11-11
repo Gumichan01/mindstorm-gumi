@@ -20,7 +20,8 @@ import lejos.utility.Delay;
 public class Hello{
 
 	private static RegulatedMotor motor,motor2;
-
+	private static int angle = 3600; 
+	
 	public static void main(String [] args){
 
 		// Recupère l'adresse du cerveau
@@ -37,12 +38,21 @@ public class Hello{
 		Delay.msDelay(1000);
 
 		// Rotation
-		motor.rotate(720);
-		motor2.rotate(720);
+		/* Une manière simple de déplacer le robot 
+		(faire les deux moteur en parralele) */
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				motor.rotate(angle);
+			}
+		}).start();
+		
+		motor2.rotate(angle);
+		
+
+		
 		Delay.msDelay(2000);
-
-
-
 
 	}
 
