@@ -49,8 +49,20 @@ public class Hello{
 		}).start();
 		
 		motor2.rotate(angle);
-		
 
+
+		
+		Delay.msDelay(100);
+		
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				motor.rotate(-angle);
+			}
+		}).start();
+		
+		motor2.rotate(-angle);
 		
 		Delay.msDelay(2000);
 
