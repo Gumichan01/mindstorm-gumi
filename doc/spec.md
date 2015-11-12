@@ -1,7 +1,7 @@
 Mindstorm (Brouillon)
-================
+=====================
 
-Spécification fonctionelle (Brouillon)
+Spécification fonctionelle 
 --------------------------
 
 
@@ -18,12 +18,12 @@ tâches (se déplacer, saisir un objet, ...).
 
 ### Cas d'utilisaion
 
-
+TODO
 
 
 
 ### Architecture
 
-
+TODO
 
 
