@@ -8,3 +8,12 @@
    - Etalonnage
    - Document pour expliciter les problèmes à résoudre
    - Document pour proposer une architecture du logiciel
+
+
+* vendredi 13 novembre 2015, 16:24:12 (UTC+0100)
+** Fait:
+   - un peu de travail sur l'etalonnage
+** a faire:
+   - etalonnage qui fonctionne en direct
+   - reflechir a des strategies pour suivre une ligne droite
+
