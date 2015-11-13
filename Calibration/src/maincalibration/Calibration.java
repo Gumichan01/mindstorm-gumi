@@ -1,6 +1,10 @@
 package maincalibration;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.IllegalFormatException;
 
 import lejos.hardware.ev3.LocalEV3;
 import lejos.utility.Delay;
@@ -11,7 +15,7 @@ public class Calibration {
 
 	public final static int NUMCHANS = 10;
 	
-	public static void main(String [] args){
+	public static void main(String [] args) throws FileNotFoundException{
 		
 		float r_avg, g_avg, b_avg;
 		float [][] sample;
@@ -48,7 +52,37 @@ public class Calibration {
 		System.out.println("AVG : " + r_avg + "\n" + g_avg + "\n" + b_avg);
 		Delay.msDelay(5000);
 		
-		sensor.close();
+		System.out.println("File saving");
+		Delay.msDelay(1000);
+		
+		try{
+			PrintWriter w = new PrintWriter(new File("avg.gumi"));
+			w.printf("%.9g\n%.9g\n%.9g\n",r_avg,g_avg,b_avg);
+			w.flush();
+			w.close();
+			
+			System.out.println("Done");
+			Delay.msDelay(1000);
+			
+		}catch(FileNotFoundException fe){
+			
+			//System.out.print("Cannot open the file:\n "+ fe.getMessage());
+			fe.printStackTrace();
+			throw fe;
+			//Delay.msDelay(5000);
+			
+		}catch(IllegalFormatException ife){
+		
+			//System.out.print("Cannot write data:\n "+ ife.getMessage());
+			ife.printStackTrace();
+			throw ife;
+			//Delay.msDelay(5000);
+		}
+		finally{
+			
+			sensor.close();
+		}
+		
 	}
 	
 }
