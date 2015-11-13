@@ -9,7 +9,7 @@ import mstorm_sensor.SensorType;
 
 public class Calibration {
 
-	public final static int NUMCHANS = 3;
+	public final static int NUMCHANS = 10;
 	
 	public static void main(String [] args){
 		
@@ -27,7 +27,7 @@ public class Calibration {
 			
 			sample[i] = sensor.fetch(SensorType.COLOR_SENSOR);
 			//System.out.println("Color : " + Arrays.toString(sample[i]));
-			Delay.msDelay(1000);
+			Delay.msDelay(500);
 		}
 		
 		// Average
@@ -46,7 +46,7 @@ public class Calibration {
 		b_avg /= NUMCHANS;
 		
 		System.out.println("AVG : " + r_avg + "\n" + g_avg + "\n" + b_avg);
-		Delay.msDelay(8000);
+		Delay.msDelay(5000);
 		
 		sensor.close();
 	}
