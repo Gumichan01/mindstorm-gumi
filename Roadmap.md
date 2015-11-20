@@ -20,9 +20,9 @@ Programme Hello Wolrd fait !
   * Programme capteur couleur + lumière
   * Etalonnage
 
-== DOING == 
+== DOING ==
 
-  * Spécification 
+  * Spécification
 
 
 == TODO ==
@@ -36,3 +36,14 @@ Programme Hello Wolrd fait !
  - [Connexion vers le cerveau] (https://github.com/ev3dev/ev3dev/wiki/Setting-Up-Windows-USB-Ethernet-Networking)
  - [API EV3] (http://www.lejos.org/ev3/docs/)
  - [Connexion EV3 obtenir adreese] (http://knowledge.autodesk.com/customer-service/network-license-administration/install-and-configure-network-license/requesting-license-file/finding-your-host-name-and-id)
+
+
+creation de plusiseurs classe pour l'etalonage et la detection dans un dosssier capteur couleur
+  Detecction.java
+  CouleurGestion.java
+  CouleurInterpreter.java
+  CouleurListener.java
+
+pour plus tard pour faire propre un dossier principal qui contiendra le main et potentiellement autre chose
+un dossier deplacement pour les deplacements du robot
+un dossier comportement pour gerer le comportement du robot pendant son deplacement potentiellement d'autre dossier si besoin
