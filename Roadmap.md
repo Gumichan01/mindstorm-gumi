@@ -47,3 +47,7 @@ creation de plusiseurs classe pour l'etalonage et la detection dans un dosssier 
 pour plus tard pour faire propre un dossier principal qui contiendra le main et potentiellement autre chose
 un dossier deplacement pour les deplacements du robot
 un dossier comportement pour gerer le comportement du robot pendant son deplacement potentiellement d'autre dossier si besoin
+
+épurations du depot git:
+- dans le dossier testes tout ce qu'on code et qu'on teste qui compile et fonctionnent plus ou moins correctement
+- dans le dossier final, on mettera dedans tout ce qui fonctionne parfaitement par exemple le dossier capteur de couleur quand l'étalonnage sera fait parfaitement.
