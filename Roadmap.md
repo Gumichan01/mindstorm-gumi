@@ -11,17 +11,16 @@ Liste des outils candidats:
 Outil sélectionné: LeJOS
 
 
-Programme Hello Wolrd fait !
-
 == DONE ==
 
+  * Hello World
   * Robot monté
   * Déplacement basique + rotation approximative sur lui-même
   * Programme capteur couleur + lumière
-  * Etalonnage
 
 == DOING ==
 
+  * Etalonnage
   * Spécification
 
 
@@ -35,7 +34,7 @@ Programme Hello Wolrd fait !
 
  - [Connexion vers le cerveau] (https://github.com/ev3dev/ev3dev/wiki/Setting-Up-Windows-USB-Ethernet-Networking)
  - [API EV3] (http://www.lejos.org/ev3/docs/)
- - [Connexion EV3 obtenir adreese] (http://knowledge.autodesk.com/customer-service/network-license-administration/install-and-configure-network-license/requesting-license-file/finding-your-host-name-and-id)
+ - [Connexion EV3 obtenir adresse] (http://knowledge.autodesk.com/customer-service/network-license-administration/install-and-configure-network-license/requesting-license-file/finding-your-host-name-and-id)
 
 
 Creation de plusiseurs classe pour l'etalonage et la detection dans un dosssier capteur couleur
