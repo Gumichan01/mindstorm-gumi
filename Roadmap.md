@@ -38,7 +38,7 @@ Programme Hello Wolrd fait !
  - [Connexion EV3 obtenir adreese] (http://knowledge.autodesk.com/customer-service/network-license-administration/install-and-configure-network-license/requesting-license-file/finding-your-host-name-and-id)
 
 
-creation de plusiseurs classe pour l'etalonage et la detection dans un dosssier capteur couleur
+Creation de plusiseurs classe pour l'etalonage et la detection dans un dosssier capteur couleur
   Detecction.java
   CouleurGestion.java
   CouleurInterpreter.java
@@ -51,3 +51,5 @@ un dossier comportement pour gerer le comportement du robot pendant son deplacem
 épurations du depot git:
 - dans le dossier testes tout ce qu'on code et qu'on teste qui compile et fonctionnent plus ou moins correctement
 - dans le dossier final, on mettera dedans tout ce qui fonctionne parfaitement par exemple le dossier capteur de couleur quand l'étalonnage sera fait parfaitement.
+
+Modifications probables des fichiers du dossier capteurcouleur et des autres aussi.
