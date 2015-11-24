@@ -20,7 +20,7 @@ Outil sélectionné: LeJOS
 
 == DOING ==
 
-  * Etalonnage
+  * Etalonnage (définir l'epsilon)
   * Spécification
 
 
@@ -29,6 +29,33 @@ Outil sélectionné: LeJOS
   * Programme qui fait avancer le robot sur une ligne/courbe
   * Test sur une ligne
 
+  
+Mise à jour : 19 novembre
+ -l'étalonnage ne marche pas, des difficultés à comprendre et à le programmer.
+ -le robot perçois qu'une "trame de couleur" mais pas totalement, il ne s'adapte pas à 
+la lumibnosité
+
+Mise à jour : 20 novembre 2015
+- des difficultés dans la detection des couleurs plus précisement faire l'étalonnage.
+- des difficultés dans le codage de la couleur noir ,blanc et vert,
+plus pécisement arriver à faire en sorte de respecter la tanche des couleurs
+-l'étalonnage est fait en parti.
+
+Mise à jour : 21 novembre 2015
+  - ajout du fichier detection.java
+  - toujours autant de difficultés a faire fonctionner l'étalonnage, 
+cela ne fait pas encore ce que l'on veut
+
+Mise à jour : 24 novembre 2015
+  - Etalonnage presque terminé, il faut juste définir un epsilon qui sera l'écart-type
+  - Le programme de parcours prendra les valeurs mesurées comme valeurs
+de référence et utilisera l'epsilon pour déterminer si la couleur capté 
+(modulo l'epsilon) est bien celle désiré pour effectuer les opérations adéquates
+  - Il sera peut-être nécessaire d'utiliser deux capteurs pour notamment savoir
+vers où dévie le robot afin d'effectuer une correction de trajectoire adéquate
+
+ 
+ 
 
 == Documentations ==
 
@@ -45,10 +72,13 @@ Creation de plusiseurs classe pour l'etalonage et la detection dans un dosssier 
 
 pour plus tard pour faire propre un dossier principal qui contiendra le main et potentiellement autre chose
 un dossier deplacement pour les deplacements du robot
-un dossier comportement pour gerer le comportement du robot pendant son deplacement potentiellement d'autre dossier si besoin
+un dossier comportement pour gerer le comportement du robot pendant son 
+déplacement potentiellement d'autre dossier si besoin
 
 épurations du depot git:
 - dans le dossier testes tout ce qu'on code et qu'on teste qui compile et fonctionnent plus ou moins correctement
 - dans le dossier final, on mettera dedans tout ce qui fonctionne parfaitement par exemple le dossier capteur de couleur quand l'étalonnage sera fait parfaitement.
 
 Modifications probables des fichiers du dossier capteurcouleur et des autres aussi.
+
+
