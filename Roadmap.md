@@ -54,8 +54,13 @@ de référence et utilisera l'epsilon pour déterminer si la couleur capté
   - Il sera peut-être nécessaire d'utiliser deux capteurs pour notamment savoir
 vers où dévie le robot afin d'effectuer une correction de trajectoire adéquate
 
- 
- 
+
+Mise à jour : 26 novembre 2015 
+  - Garder les moyennes. Lors du suivi de ligne, prendre les mesures et  
+calculer dynamiquement l'ecart-type pour chaque canal.  
+On calcule une moyenne *meta_moy* des trois canaux de couleur (*moy_r*,*moy_g*,*moy_b*)  
+et aussi une moyenne *sigma_moy* des trois écart-types (*sigma_r*,*sigma_g*,*sigma_b*).
+Si *sigma_moy* < *meta_moy* alors la couleur est bonne. (A tester)
 
 == Documentations ==
 
