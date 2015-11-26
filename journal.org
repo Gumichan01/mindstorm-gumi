@@ -17,3 +17,8 @@
    - etalonnage qui fonctionne en direct
    - reflechir a des strategies pour suivre une ligne droite
 
+
+Jeu 26 nov 2015 15:51:31 CET
+** a faire
+   - étalonage adaptatif (écart-type?), etc.
+   - faire une description abstraite d'un suivi de ligne (problème de la sortie de ligne)
