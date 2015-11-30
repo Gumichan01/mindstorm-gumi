@@ -38,9 +38,43 @@ public class ColorChecker {
 	}
 
 	/// Verifie si la couleur est bien celle attendue
-	boolean isGoodcColor(float [] sample_to_check) throws Exception{
+	public boolean isGoodcColor(float [] sample_to_check) throws Exception{
+		/// TODO Calculer l'écart-type et verifier sa valeur, si OK -> TRUE, sinon FALSE 
+		if(sample_to_check.length != NB_COLORS)
+			return false;
+
+		float sigma_red, sigma_green, sigma_blue;
+		float red_variance, green_variance, blue_variance;
 		
-		throw new Exception("Not implemented yet.");
+		float max_avg, min_avg, range;
+		max_avg = avg_sample[0];
+		min_avg = avg_sample[0];
+		
+		for(float v : avg_sample){
+			
+			if(v < min_avg)
+				min_avg = v;
+			
+			if(v > max_avg)
+				max_avg = v;
+		}
+
+		// Zone entre max et min
+		range = max_avg - min_avg;
+
+		// Variances
+		red_variance = (sample_to_check[0] - avg_sample[0]) * (sample_to_check[0] - avg_sample[0]);
+		green_variance = (sample_to_check[1] - avg_sample[1]) * (sample_to_check[1] - avg_sample[1]);
+		blue_variance = (sample_to_check[2] - avg_sample[2]) * (sample_to_check[2] - avg_sample[2]);
+
+		// Ecart-types
+		sigma_red = (float) Math.sqrt(red_variance);
+		sigma_green = (float) Math.sqrt(green_variance);
+		sigma_blue = (float) Math.sqrt(blue_variance);
+		
+		System.out.println("range: "+range+"\n\n"+sigma_red+"\n"+sigma_green+"\n"+sigma_blue);
+		
+		return(sigma_red <= range && sigma_green <= range && sigma_blue <= range);
 	}
 	
 	
