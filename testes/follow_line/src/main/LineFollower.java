@@ -9,11 +9,14 @@ import mstorm_sensor.SensorType;
 
 public class LineFollower {
 
+	private final static long DPS = 30;			// Detection par seconde
+	private final static long SECOND = 1000;	// 1 seconde
+	
+	
 	public static void main(String[] args) throws Exception {
-		// TODO Vérifier si la couleur capté est correct
-		// TODO Créer la classe chargé du déplacement
-		// TODO se déplacer si (couleur OK && etat = arret)
-		// TODO Corriger trajectoire si (couleur KO && etat = avance)
+		// TODO Réflechir sur la correction de trajectoire
+		
+		final long delay = SECOND/DPS;	// Durée entre deux detection
 		
 		Engine engine = new Engine();
 		LightAndColorSensor sensor = new LightAndColorSensor(LocalEV3.get().
@@ -25,15 +28,24 @@ public class LineFollower {
 		
 		float [] s = sensor.fetch(SensorType.COLOR_SENSOR);
 		
-		if(!checker.isGoodcColor(s))
+		// Bout de code basique. Si la couleur est bonne on avance, 
+		// sinon on ne bouge pas
+		/*if(!checker.isGoodcColor(s))
 			System.out.println("Bad color");
 		else{
 			System.out.println("Good color");
 			engine.run();
+		}*/
+		
+		// Tant que l'on detecte la bonne couleur, on avance
+		while(checker.isGoodcColor(s))
+		{
+			engine.run();
+			Delay.msDelay(delay);	// On attend un peu avant de refaire la mesure
+			s = sensor.fetch(SensorType.COLOR_SENSOR);
 		}
 		
-		Delay.msDelay(4000);
-		
+		engine.stop();
 		sensor.close();
 	}
 
