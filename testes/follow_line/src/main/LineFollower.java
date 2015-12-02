@@ -9,7 +9,7 @@ import mstorm_sensor.SensorType;
 
 public class LineFollower {
 
-	private final static long DPS = 30;			// Detection par seconde
+	private final static long DPS = 60;			// Detection par seconde
 	private final static long SECOND = 1000;	// 1 seconde
 	
 	
