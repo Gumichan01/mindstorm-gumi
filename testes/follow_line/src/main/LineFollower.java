@@ -16,7 +16,7 @@ public class LineFollower {
 	public static void main(String[] args) throws Exception {
 		// TODO Réflechir sur la correction de trajectoire
 		
-		final long delay = SECOND/DPS;	// Durée entre deux detection
+		final long delay = SECOND/DPS;	// Durée entre deux detections
 		
 		Engine engine = new Engine();
 		LightAndColorSensor sensor = new LightAndColorSensor(LocalEV3.get().
