@@ -13,7 +13,6 @@ public class ColorChecker {
 	public ColorChecker() throws IOException {
 
 		try{
-		
 			avg_sample = new float[NB_COLORS];
 			BufferedReader reader = new BufferedReader(new FileReader("avg.gumi")); 
 			
@@ -26,15 +25,10 @@ public class ColorChecker {
 			reader.close();
 			
 		}catch(IOException e){
-			
-			System.out.println("IOException occurred : "+ e.getMessage());
-			throw e;
-			
+			throw e;	
 		}catch(NumberFormatException ne){
-			
-			System.out.println("NumberFormatxception occurred : "+ ne.getMessage());
 			throw ne;
-		}catch(Exception ex){}
+		}
 	}
 
 	/// Verifie si la couleur est bien celle attendue
@@ -72,10 +66,6 @@ public class ColorChecker {
 		sigma_green = (float) Math.sqrt(green_variance);
 		sigma_blue = (float) Math.sqrt(blue_variance);
 		
-		System.out.println("range: "+range+"\n\n"+sigma_red+"\n"+sigma_green+"\n"+sigma_blue);
-		
 		return(sigma_red <= range && sigma_green <= range && sigma_blue <= range);
 	}
-	
-	
 }
