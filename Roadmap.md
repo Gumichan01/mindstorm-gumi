@@ -62,6 +62,30 @@ On calcule une moyenne *meta_moy* des trois canaux de couleur (*moy_r*,*moy_g*,*
 et aussi une moyenne *sigma_moy* des trois écart-types (*sigma_r*,*sigma_g*,*sigma_b*).
 Si *sigma_moy* < *meta_moy* alors la couleur est bonne. (A tester)
 
+
+Mise à jour : 11 décembre 2015 
+
+  - Pour l'étalonnage, travailler en terme de coordonnées.
+  - Etalonnage de la couleur de la ligne + couleur du fond
+
+Avancer bêtement selon la couleur, on prend un certain nombre de mesures, 
+on prend la médiane. 
+  - Test couleur : Plusieurs couleurs (~5-8 mesures) dans un tableau
+Calcul coordonnées rgb + distance euclidiene dans l'espace. 
+Si la position est plus proche de la couleur de la ligne que du fond -> OK, 
+sinon KO.
+
+  - Suivi de ligne : aller vers le bord. 
+Si on est sur le bord -> avancer  
+Sinon -> continuer à chercher  
+
+Lorsqu'on est sur le bord: Avancer...  
+Si la couleur capter vire vers le fond -> revenir vers la ligne
+Si la couleur capter vire vers la ligne -> revenir vers le bord
+
+
+
+
 == Documentations ==
 
  - [Connexion vers le cerveau] (https://github.com/ev3dev/ev3dev/wiki/Setting-Up-Windows-USB-Ethernet-Networking)
