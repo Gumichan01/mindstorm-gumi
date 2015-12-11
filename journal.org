@@ -1,14 +1,10 @@
-* vendredi 30 octobre 2015, 15:52:38 (UTC+0100)
+* vendredi 11 décembre 2015, 15:50:18 (UTC+0100)
 ** Fait:
-   - Hello World
-   - Robot presque monté
-   - Bouger les moteurs
-   - Tester les capteurs de couleur et de lumière
+   - Etalonnage a revoir
+   - Un suivi de ligne sans correction de trajectoire
 ** A faire:
-   - Etalonnage
-   - Document pour expliciter les problèmes à résoudre
-   - Document pour proposer une architecture du logiciel
-
+   - Vrai etalonnage
+   - Correction de trajectoire
 
 * vendredi 13 novembre 2015, 16:24:12 (UTC+0100)
 ** Fait:
@@ -22,3 +18,16 @@ Jeu 26 nov 2015 15:51:31 CET
 ** a faire
    - étalonage adaptatif (écart-type?), etc.
    - faire une description abstraite d'un suivi de ligne (problème de la sortie de ligne)
+* vendredi 30 octobre 2015, 15:52:38 (UTC+0100)
+** Fait:
+   - Hello World
+   - Robot presque monté
+   - Bouger les moteurs
+   - Tester les capteurs de couleur et de lumière
+** A faire:
+   - Etalonnage
+   - Document pour expliciter les problèmes à résoudre
+   - Document pour proposer une architecture du logiciel
+
+
+
