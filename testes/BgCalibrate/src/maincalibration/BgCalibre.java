@@ -10,8 +10,8 @@ import java.util.IllegalFormatException;
 
 import lejos.hardware.ev3.LocalEV3;
 import lejos.utility.Delay;
-import mstorm_sensor.LightAndColorSensor;
-import mstorm_sensor.SensorType;
+import mstorm_sensor_calibration.LightAndColorSensor;
+import mstorm_sensor_calibration.SensorType;
 
 public class BgCalibre {
 
