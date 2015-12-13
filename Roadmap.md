@@ -17,17 +17,18 @@ Outil sélectionné: LeJOS
   * Robot monté
   * Déplacement basique + rotation approximative sur lui-même
   * Programme capteur couleur + lumière
-
+  * Etalonnage OK
+  
 == DOING ==
 
-  * Etalonnage (définir l'epsilon)
   * Spécification
-
+  * Programme qui fait avancer le robot sur une ligne/courbe
+  * Test sur une ligne
 
 == TODO ==
 
-  * Programme qui fait avancer le robot sur une ligne/courbe
-  * Test sur une ligne
+  * Correction de trajectoire
+
 
   
 Mise à jour : 19 novembre
