@@ -45,7 +45,6 @@ public class ColorChecker {
 	/// Verifie si la couleur est bien celle attendue
 	public boolean isGoodcColor(float [] sample_to_check) throws Exception{
 		
-		/// TODO Les canaux sont les coordonnées de la couleur 
 		if(sample_to_check.length != NB_COLORS)
 			return false;
 
@@ -91,7 +90,15 @@ public class ColorChecker {
 	
 	public float euclide_distance(float [] color1,float [] color2)
 	{
-		// TODO euclide
-		return 0.0f;
+		return (float) Math.sqrt(square_euclide_distance(color1, color2));
+	}
+	
+	private float square_euclide_distance(float [] color1,float [] color2)
+	{
+		float dr = color2[0] - color1[0];
+		float dg = color2[1] - color1[1];
+		float db = color2[2] - color1[2];
+				
+		return  (dr*dr) + (dg*dg) + (db*db);
 	}
 }
