@@ -1,23 +1,21 @@
 package gumi_color;
 
-import java.util.Arrays;
+import java.io.IOException;
 
-import lejos.hardware.BrickFinder;
-import lejos.hardware.ev3.EV3;
 import lejos.hardware.ev3.LocalEV3;
-import lejos.hardware.lcd.TextLCD;
-import lejos.hardware.port.Port;
-import lejos.hardware.sensor.EV3ColorSensor;
-import lejos.robotics.SampleProvider;
 import lejos.utility.Delay;
+import mstorm_colorcheck.ColorChecker;
+import mstorm_moving.Engine;
+import mstorm_sensor.LightAndColorSensor;
+import mstorm_sensor.SensorType;
 
 public class ColorDetection {
 
 	public static final float WHITE_MIN_VALUE = (float) 0.75;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
-		Port port = LocalEV3.get().getPort("S1");
+		/*Port port = LocalEV3.get().getPort("S1");
 		TextLCD lcd = ((EV3) BrickFinder.getLocal()).getTextLCD();
 
 		// Créer le capteur
@@ -56,15 +54,36 @@ public class ColorDetection {
 			Delay.msDelay(500);
 
 			System.out.println("Light : " + Arrays.toString(sample));
-			
-			DisplayIfNoLight(sample);
-			
+			DisplayIfNoLight(sample);	
 			i++;
 		}		
 		
 		Delay.msDelay(4000);
-		sensor.close();
+		sensor.close();*/
 		
+		Engine engine = new Engine();
+		LightAndColorSensor sensor = new LightAndColorSensor(LocalEV3.get().
+				getPort(LightAndColorSensor.sensor_port));
+		
+		// Poubelle
+		sensor.fetch(SensorType.COLOR_SENSOR);
+		
+		int i = 0;
+		float [] sample;
+		float red, green, blue;
+		
+		engine.run();
+		
+		while(i < 100)
+		{
+			sample = sensor.fetch(SensorType.COLOR_SENSOR); 
+			red = sample[0];
+			green = sample[1];
+			blue = sample[2];
+			i++;
+			Delay.msDelay(16);
+		}
+		sensor.close();
 	}
 
 	
