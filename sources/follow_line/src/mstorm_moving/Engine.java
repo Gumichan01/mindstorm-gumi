@@ -15,10 +15,13 @@ public class Engine {
 	
 	private final static long DPS = 60;			// Detection par seconde
 	private final static long SECOND = 1000;	// 1 seconde
-	private final static long TOTAL_DELAY = 30000;	// 1 seconde
+	private final static long TOTAL_DELAY = 15000;
 
 	private final static int angle_run = 360;
-	private final static int angle_rotate = 15;
+	private final static int angle_rotate = 8;
+	private final static int speed = 225;	// Vitesse du robot
+	
+	
 	private RegulatedMotor left_motor, right_motor;
 	private ColorChecker checker;
 	private LightAndColorSensor sensor;
@@ -32,6 +35,9 @@ public class Engine {
 		left_motor = new EV3LargeRegulatedMotor(MotorPort.D);
 		right_motor = new EV3LargeRegulatedMotor(MotorPort.A);
 		is_running = false;
+		
+		left_motor.setSpeed(speed);
+		right_motor.setSpeed(speed);
 	}
 
 	// Faire tourner le moteur
@@ -65,13 +71,15 @@ public class Engine {
 			{
 				run();
 				Delay.msDelay(delay);
-				s = sensor.fetch(SensorType.COLOR_SENSOR);
 			}
 			else{
 				Delay.msDelay(delay);
 				leftCorrection();
-				run();
+				stop();
+				Delay.msDelay(delay);
 			}
+			
+			s = sensor.fetch(SensorType.COLOR_SENSOR);
 		}
 
 		stop();
@@ -82,14 +90,16 @@ public class Engine {
 	private void leftCorrection() throws Exception{
 		
 		float [] s = sensor.fetch(SensorType.COLOR_SENSOR); 
+		left_motor.stop();
 		
 		while(!checker.isGoodcColor(s)){
 			
 			right_motor.rotate(angle_rotate,true);
-			left_motor.rotate(-(angle_rotate/2),true);
+			//left_motor.rotate(-(angle_rotate/2),true);
 			
 			s = sensor.fetch(SensorType.COLOR_SENSOR);
 		}
+		right_motor.stop();
 	}
 	
 	private void rightCorrection(){
