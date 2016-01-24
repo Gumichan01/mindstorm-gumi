@@ -18,7 +18,7 @@ public class Engine {
 	private final static long TOTAL_DELAY = 15000;
 
 	private final static int angle_run = 360;
-	private final static int angle_rotate = 8;
+	private final static int angle_rotate = 225;
 	private final static int speed = 225;	// Vitesse du robot
 	
 	
@@ -95,7 +95,7 @@ public class Engine {
 		while(!checker.isGoodcColor(s)){
 			
 			right_motor.rotate(angle_rotate,true);
-			//left_motor.rotate(-(angle_rotate/2),true);
+			//left_motor.rotate((angle_rotate/4),true);
 			
 			s = sensor.fetch(SensorType.COLOR_SENSOR);
 		}
