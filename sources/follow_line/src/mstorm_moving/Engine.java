@@ -67,14 +67,16 @@ public class Engine {
 
 		while((System.currentTimeMillis() - ref_time) < TOTAL_DELAY){
 			
-			if(checker.isGoodcColor(s))
-			{
+			if(checker.isGoodcColor(s)){
+				
 				run();
 				Delay.msDelay(delay);
 			}
 			else{
+				
 				Delay.msDelay(delay);
 				leftCorrection();
+				//rightCorrection();
 				stop();
 				Delay.msDelay(delay);
 			}
@@ -91,20 +93,36 @@ public class Engine {
 		
 		float [] s = sensor.fetch(SensorType.COLOR_SENSOR); 
 		left_motor.stop();
+		left_motor.setSpeed(speed/4);
 		
 		while(!checker.isGoodcColor(s)){
 			
 			right_motor.rotate(angle_rotate,true);
-			//left_motor.rotate((angle_rotate/4),true);
+			left_motor.rotate(angle_rotate,true);
 			
 			s = sensor.fetch(SensorType.COLOR_SENSOR);
 		}
-		right_motor.stop();
+		
+		stop();
+		left_motor.setSpeed(speed);
 	}
 	
-	private void rightCorrection(){
+	private void rightCorrection() throws Exception{
 		
-		throw new UnsupportedOperationException("TODO rightcCorrection");
+		float [] s = sensor.fetch(SensorType.COLOR_SENSOR); 
+		right_motor.stop();
+		right_motor.setSpeed(speed/4);
+		
+		while(!checker.isGoodcColor(s)){
+			
+			right_motor.rotate(angle_rotate,true);
+			left_motor.rotate(angle_rotate,true);
+			
+			s = sensor.fetch(SensorType.COLOR_SENSOR);
+		}
+		
+		stop();
+		right_motor.setSpeed(speed);
 	}	
 	
 	
