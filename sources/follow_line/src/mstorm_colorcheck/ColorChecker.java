@@ -67,10 +67,12 @@ public class ColorChecker {
 		return Math.abs(dist_line - dist_bg) <= epsilon;
 	}
 	
+	
 	private float euclide_distance(float [] color1,float [] color2)
 	{
 		return (float) Math.sqrt(square_euclide_distance(color1, color2));
 	}
+	
 	
 	private float square_euclide_distance(float [] color1,float [] color2)
 	{
