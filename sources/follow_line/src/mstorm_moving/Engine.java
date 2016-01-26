@@ -25,7 +25,9 @@ public class Engine {
 	private RegulatedMotor left_motor, right_motor;
 	private ColorChecker checker;
 	private LightAndColorSensor sensor;
-	private boolean is_running;
+	private int id_strat;
+	//private boolean is_running;
+	private boolean bg_right;			// Indique si le fond est à droite du robot
 	
 	public Engine() throws IOException{
 		
@@ -34,7 +36,9 @@ public class Engine {
 		checker = new ColorChecker();
 		left_motor = new EV3LargeRegulatedMotor(MotorPort.D);
 		right_motor = new EV3LargeRegulatedMotor(MotorPort.A);
-		is_running = false;
+		id_strat = 0;
+		//is_running = false;
+		bg_right = false;
 		
 		left_motor.setSpeed(speed);
 		right_motor.setSpeed(speed);
@@ -67,21 +71,40 @@ public class Engine {
 
 		while((System.currentTimeMillis() - ref_time) < TOTAL_DELAY){
 			
-			if(checker.isGoodcColor(s)){
+			if(id_strat == 0){
 				
-				run();
-				Delay.msDelay(delay);
-			}
-			else{
+				// On est perdu, donc on avance bêtement
+				while(checker.isGoodcColor(s)){
+					
+					go();
+					s = sensor.fetch(SensorType.COLOR_SENSOR);
+				}
 				
-				Delay.msDelay(delay);
+				/* 	On retrouve notre chemin en enregistrant
+				 *  l'endroit où est situé le fond */
 				leftCorrection();
-				//rightCorrection();
 				stop();
 				Delay.msDelay(delay);
+				bg_right = true;
+				id_strat = 1;
 			}
 			
 			s = sensor.fetch(SensorType.COLOR_SENSOR);
+			
+			while(checker.isBorder(s)){
+				
+				go();
+				s = sensor.fetch(SensorType.COLOR_SENSOR);
+			}
+			
+			if(checker.isGoodcColor(s)){
+			
+				fromLineToBorder();
+
+			} else {
+
+				fromBackgroundToBorder();
+			}
 		}
 
 		stop();
@@ -89,13 +112,20 @@ public class Engine {
 	}
 	
 	
+	private void go(){
+		
+		run();
+		Delay.msDelay(SECOND/DPS);
+	}
+	
+	// Revenir vers la gauche
 	private void leftCorrection() throws Exception{
 		
 		float [] s = sensor.fetch(SensorType.COLOR_SENSOR); 
 		left_motor.stop();
 		left_motor.setSpeed(speed/4);
 		
-		while(!checker.isGoodcColor(s)){
+		while(!checker.isBorder(s)){
 			
 			right_motor.rotate(angle_rotate,true);
 			left_motor.rotate(angle_rotate,true);
@@ -107,13 +137,14 @@ public class Engine {
 		left_motor.setSpeed(speed);
 	}
 	
+	// Revenir vers la droite
 	private void rightCorrection() throws Exception{
 		
 		float [] s = sensor.fetch(SensorType.COLOR_SENSOR); 
 		right_motor.stop();
 		right_motor.setSpeed(speed/4);
 		
-		while(!checker.isGoodcColor(s)){
+		while(!checker.isBorder(s)){
 			
 			right_motor.rotate(angle_rotate,true);
 			left_motor.rotate(angle_rotate,true);
@@ -126,4 +157,32 @@ public class Engine {
 	}	
 	
 	
+	// On est dans la ligne et on veut revenir au bord
+	private void fromLineToBorder() throws Exception{
+		
+		if(bg_right){
+			
+			// Fond à droite, donc le bord est à droite
+			rightCorrection();
+
+		} else {
+
+			// Sinon c'est que le bord est à gauche
+			leftCorrection();
+		}
+	}
+	
+	
+	// On est dans le fond et on veut revenir au bord
+	private void fromBackgroundToBorder() throws Exception{
+		
+		if(bg_right){
+			
+			leftCorrection();
+
+		} else {
+			
+			rightCorrection();
+		}
+	}
 }
