@@ -9,9 +9,9 @@ public class ColorChecker {
 
 	private static final int NB_COLORS = 3;
 	private static final float MARGIN = 2.5f;
-	float [] line_sample;						// Couleur de la ligne
-	float [] bg_sample;							// Couleur du fond
-	float epsilon;								// Marge d'erreur pour le calcul du bord
+	private static float [] line_sample;	// Couleur de la ligne
+	private float [] bg_sample;				// Couleur du fond
+	private float epsilon;					// Marge d'erreur pour le calcul du bord
 	
 	public ColorChecker() throws IOException {
 
@@ -68,18 +68,43 @@ public class ColorChecker {
 	}
 	
 	
-	private float euclide_distance(float [] color1,float [] color2)
-	{
+	private static float euclide_distance(float [] color1,float [] color2){
+		
 		return (float) Math.sqrt(square_euclide_distance(color1, color2));
 	}
 	
 	
-	private float square_euclide_distance(float [] color1,float [] color2)
-	{
+	private static float square_euclide_distance(float [] color1,float [] color2){
+		
 		float dr = color2[0] - color1[0];
 		float dg = color2[1] - color1[1];
 		float db = color2[2] - color1[2];
 				
 		return  (dr*dr) + (dg*dg) + (db*db);
+	}
+	
+	/// TODO Test this sort
+	public static float[][] insertionSort(float[][] array) {
+		
+		int cpt;
+		float[] element;
+
+		for (int i = 1; i < array.length; i++) {
+
+			element = array[i];
+			cpt = i - 1;
+
+			while (cpt >= 0 
+					&& (euclide_distance(array[cpt], line_sample) 
+						> euclide_distance(element, line_sample))) {
+
+				array[cpt + 1] = array[cpt];
+				cpt--;
+			}
+
+			array[cpt + 1] = element;
+		}
+		
+		return array;
 	}
 }
