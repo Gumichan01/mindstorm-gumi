@@ -59,18 +59,16 @@ public class LightAndColorSensor extends EV3ColorSensor {
 	/// TODO Test the new implementation
 	private float[] fetchColorSample() {
 
-		ArrayList<float[]> list_sample = new ArrayList<float[]>();
+		float [][] stock_array = new float[11][];
 
 		float[] sample = new float[color_provider.sampleSize()];
 
 		for (int i = 0; i < 11; i++) {
 			color_provider.fetchSample(sample, 0);
-			list_sample.add(sample);
+			stock_array[i] = sample;
+			//list_sample.add(sample);
 			Delay.msDelay(16);
 		}
-
-		float [][] stock_array = new float[list_sample.size()][];
-		stock_array = (float[][]) list_sample.toArray();
 		
 		float [][] sorted_array = ColorChecker.insertionSort(stock_array);
 		
