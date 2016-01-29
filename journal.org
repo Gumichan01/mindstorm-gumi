@@ -1,3 +1,9 @@
+* ven. janv. 29, 2016  1:06
+** Fait:
+   - usage d'un calcul de médiane par très efficace
+   - algo de suivi mais pas encore correct
+** A faire:
+   - corriger le calcul de la médiane et l'algo de suivi.
 * vendredi 11 décembre 2015, 15:50:18 (UTC+0100)
 ** Fait:
    - Etalonnage a revoir
