@@ -94,7 +94,7 @@ Si la couleur capter vire vers la ligne -> revenir vers le bord
  - [Connexion EV3 obtenir adresse] (http://knowledge.autodesk.com/customer-service/network-license-administration/install-and-configure-network-license/requesting-license-file/finding-your-host-name-and-id)
 
 
-Creation de plusiseurs classe pour l'etalonage et la detection dans un dosssier capteur couleur
+Creation de plusiseurs classe pour l'étalonnage et la detection dans un dosssier capteur couleur
   Detecction.java
   CouleurGestion.java
   CouleurInterpreter.java
@@ -115,23 +115,9 @@ Modifications probables des fichiers du dossier capteurcouleur et des autres aus
 Mise à jour : 22 décembre 2015
 - étalonnage en cours, nouvelle version adaptée des remaques des profs
 
-Mise à jour : 28 décembre 2015
-- étalonnage fini.
-- début du suivi de ligne
 
-Mise à jour : 05 Janvier 2016
-- suivi de ligne toujours en phase d'implémentation
-- calibration en phase de développement
-
-Mise à jour : 18 Janvier 2016
-- étalonnage fait (certains bugs corrigé)
-- suivi de ligne quasiment au point (bugs et test à faire et vérifier)
-
-Mise à jour : 21 Janvier 2016
-- le suivi de ligne est presque au point pour ce qui est actuellemnt demandé
-- la calibration est toujours en cours.
+Mise à jour : 24 Janvier 2016
+- Définition d'une heuristique de suivi de ligne.
 
 Mise à jour : 28 Janvier 2016:
-- le suivi de ligne est au point pour ce qui est demandé de faire.
-- la calibration est faite.
-- phase de test et de dégogage en cours.
+- Correction au niveau de la detection de couleur durant le parcours.
