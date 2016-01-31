@@ -123,7 +123,7 @@ public class Engine {
 		
 		float [] s = sensor.fetch(SensorType.COLOR_SENSOR); 
 		left_motor.stop();
-		left_motor.setSpeed(speed/4);
+		left_motor.setSpeed(speed/2);
 		
 		while(!checker.isBorder(s)){
 			
@@ -142,7 +142,7 @@ public class Engine {
 		
 		float [] s = sensor.fetch(SensorType.COLOR_SENSOR); 
 		right_motor.stop();
-		right_motor.setSpeed(speed/4);
+		right_motor.setSpeed(speed/2);
 		
 		while(!checker.isBorder(s)){
 			

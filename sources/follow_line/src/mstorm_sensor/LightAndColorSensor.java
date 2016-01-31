@@ -33,7 +33,7 @@ public class LightAndColorSensor extends EV3ColorSensor {
 	private void setScale() {
 
 		scale = 1 / (light_value - dark_value);
-		System.out.println("Scale: " + scale);
+		//System.out.println("Scale: " + scale);
 	}
 
 	// Get a value (RGB or Light) from the sensor
@@ -60,7 +60,6 @@ public class LightAndColorSensor extends EV3ColorSensor {
 	private float[] fetchColorSample() {
 
 		float [][] stock_array = new float[11][];
-
 		float[] sample = new float[color_provider.sampleSize()];
 
 		for (int i = 0; i < 11; i++) {
