@@ -9,12 +9,9 @@ import lejos.robotics.SampleProvider;
 public class LightAndColorSensor extends EV3ColorSensor{
 
 	public final static String sensor_port = "S1";
-	private final static float light_value = 0.42f;
-	private final static float dark_value = 0.02f;
 	
 	private SampleProvider color_provider;
 	private SampleProvider light_provider;
-	private float scale;
 	
 	public LightAndColorSensor(Port port) {
 		super(port);
@@ -22,15 +19,6 @@ public class LightAndColorSensor extends EV3ColorSensor{
 		color_provider = this.getRGBMode();
 		light_provider = this.getAmbientMode();
 		
-		setScale();
-	}
-
-	/**
-	 * 	Set the minimal scale
-	 */
-	private void setScale(){
-		
-		scale = 1 / (light_value - dark_value);
 	}
 	
 	
@@ -44,10 +32,6 @@ public class LightAndColorSensor extends EV3ColorSensor{
 		else{
 			values = fetchLightSample();
 	    }
-
-		for(int i = 0; i < values.length;i++){
-			values[i] *= scale; 
-		}
 		
 		return values;
 	}

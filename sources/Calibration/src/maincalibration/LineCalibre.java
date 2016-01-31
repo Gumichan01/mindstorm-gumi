@@ -29,7 +29,6 @@ public class LineCalibre {
 		int sz = sensor.getRGBMode().sampleSize();
 		sample = new float[NUMCHANS][sz];
 
-		// 3 color Detections
 		for(int i = 0; i <NUMCHANS; i++){
 	
 			sample[i] = sensor.fetch(SensorType.COLOR_SENSOR);

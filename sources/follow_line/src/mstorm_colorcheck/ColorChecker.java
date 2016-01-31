@@ -8,7 +8,7 @@ import java.io.IOException;
 public class ColorChecker {
 
 	private static final int NB_COLORS = 3;
-	private static final float MARGIN = 2.5f;
+	private static final float MARGIN = 2.0f;
 	private static float [] line_sample;	// Couleur de la ligne
 	private float [] bg_sample;				// Couleur du fond
 	private float epsilon;					// Marge d'erreur pour le calcul du bord
