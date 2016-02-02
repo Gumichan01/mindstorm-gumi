@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.IllegalFormatException;
 
+import lejos.hardware.Button;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.utility.Delay;
 import mstorm_sensor_calibration.LightAndColorSensor;
@@ -29,10 +30,17 @@ public class BgCalibre {
 		int sz = sensor.getRGBMode().sampleSize();
 		sample = new float[NUMCHANS][sz];
 
+		// Mesure à ignorer
+		sensor.fetch(SensorType.COLOR_SENSOR);
+		
 		// Color detections
 		for(int i = 0; i <NUMCHANS; i++){
 	
+			System.out.println("Waiting for input");
+			Button.DOWN.waitForPressAndRelease();
 			sample[i] = sensor.fetch(SensorType.COLOR_SENSOR);
+			System.out.println("Input done. Got : \n"+sample[i][0] + "\n" 
+								+ sample[i][1] + "\n" + sample[i][2]);
 			Delay.msDelay(500);
 		}
 
@@ -74,7 +82,7 @@ public class BgCalibre {
 			sensor.close();
 			throw ife;
 		}catch (IOException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 			sensor.close();
 			throw e;
