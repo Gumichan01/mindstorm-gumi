@@ -48,8 +48,12 @@ public class Engine {
 	public void run()
 	{
 		// Avec cette signature, cette fonction est non-bloquante
-		left_motor.rotate(angle_run, true);
-		right_motor.rotate(angle_run, true);
+		left_motor.setSpeed(speed);
+		right_motor.setSpeed(speed);
+		left_motor.forward();
+		right_motor.forward();
+		//left_motor.rotate(angle_run, true);
+		//right_motor.rotate(angle_run, true);
 	}
 	
 	// Marque l'arrêt du moteur
@@ -115,14 +119,13 @@ public class Engine {
 	private void go(){
 		
 		run();
-		Delay.msDelay(SECOND/DPS);
 	}
 	
 	// Revenir vers la gauche
 	private void leftCorrection() throws Exception{
 		
 		float [] s = sensor.fetch(SensorType.COLOR_SENSOR); 
-		left_motor.stop();
+		//left_motor.stop();
 		left_motor.setSpeed(speed/2);
 		
 		while(!checker.isBorder(s)){
@@ -133,7 +136,7 @@ public class Engine {
 			s = sensor.fetch(SensorType.COLOR_SENSOR);
 		}
 		
-		stop();
+		//stop();
 		left_motor.setSpeed(speed);
 	}
 	
@@ -141,7 +144,7 @@ public class Engine {
 	private void rightCorrection() throws Exception{
 		
 		float [] s = sensor.fetch(SensorType.COLOR_SENSOR); 
-		right_motor.stop();
+		//right_motor.stop();
 		right_motor.setSpeed(speed/2);
 		
 		while(!checker.isBorder(s)){
@@ -152,7 +155,7 @@ public class Engine {
 			s = sensor.fetch(SensorType.COLOR_SENSOR);
 		}
 		
-		stop();
+		//stop();
 		right_motor.setSpeed(speed);
 	}	
 	
