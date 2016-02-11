@@ -15,10 +15,10 @@ import lejos.utility.Delay;
 import mstorm_sensor_calibration.LightAndColorSensor;
 import mstorm_sensor_calibration.SensorType;
 
-public class BgCalibre {
+public class HTCalibre {
 
-	public final static int NUMCHANS = 10;
-	public final static String bg_gumi = "bg.gumi";
+	public final static int NUMCHANS = 4;
+	public final static String ht_gumi = "ht.gumi";
 	
 	public static void main(String [] args) throws IOException{
 
@@ -42,8 +42,6 @@ public class BgCalibre {
 			sample[i] = sensor.fetch(SensorType.COLOR_SENSOR);
 			LCD.drawString("Input done. Got : \n"+sample[i][0] + "\n" 
 								+ sample[i][1] + "\n" + sample[i][2], 0, 0);
-			/*System.out.println("Input done. Got : \n"+sample[i][0] + "\n" 
-								+ sample[i][1] + "\n" + sample[i][2]);*/
 		}
 
 		// Average
@@ -63,10 +61,10 @@ public class BgCalibre {
 
 		try{
 			// Delete the file
-			new File(bg_gumi).delete();
-			new FileWriter(new File(bg_gumi)).close();
+			new File(ht_gumi).delete();
+			new FileWriter(new File(ht_gumi)).close();
 
-			PrintWriter w = new PrintWriter(new BufferedWriter(new FileWriter(bg_gumi, false)));
+			PrintWriter w = new PrintWriter(new BufferedWriter(new FileWriter(ht_gumi, false)));
 			w.printf("%.9g\n%.9g\n%.9g\n",r_avg,g_avg,b_avg);
 			w.flush();
 			w.close();
