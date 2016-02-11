@@ -15,18 +15,16 @@ public class Engine {
 	
 	private final static long DPS = 60;			// Detection par seconde
 	private final static long SECOND = 1000;	// 1 seconde
-	private final static long TOTAL_DELAY = 15000;
+	private final static long TOTAL_DELAY = 30000;
 
 	private final static int angle_run = 360;
 	private final static int angle_rotate = 225;
 	private final static int speed = 225;	// Vitesse du robot
 	
-	
 	private RegulatedMotor left_motor, right_motor;
 	private ColorChecker checker;
 	private LightAndColorSensor sensor;
 	private int id_strat;
-	//private boolean is_running;
 	private boolean bg_right;			// Indique si le fond est à droite du robot
 	
 	public Engine() throws IOException{
@@ -37,7 +35,6 @@ public class Engine {
 		left_motor = new EV3LargeRegulatedMotor(MotorPort.D);
 		right_motor = new EV3LargeRegulatedMotor(MotorPort.A);
 		id_strat = 0;
-		//is_running = false;
 		bg_right = false;
 		
 		left_motor.setSpeed(speed);
@@ -45,15 +42,18 @@ public class Engine {
 	}
 
 	// Faire tourner le moteur
-	public void run()
+	public void go()
 	{
-		// Avec cette signature, cette fonction est non-bloquante
-		left_motor.setSpeed(speed);
-		right_motor.setSpeed(speed);
 		left_motor.forward();
 		right_motor.forward();
-		//left_motor.rotate(angle_run, true);
-		//right_motor.rotate(angle_run, true);
+	}
+	
+
+	public void halfTurn() {
+		left_motor.backward();
+		right_motor.forward();
+		Delay.msDelay(2000);
+		bg_right = false;
 	}
 	
 	// Marque l'arrêt du moteur
@@ -78,7 +78,7 @@ public class Engine {
 			if(id_strat == 0){
 				
 				// On est perdu, donc on avance bêtement
-				while(checker.isGoodcColor(s)){
+				while(checker.isLinecColor(s)){
 					
 					go();
 					s = sensor.fetch(SensorType.COLOR_SENSOR);
@@ -101,13 +101,15 @@ public class Engine {
 				s = sensor.fetch(SensorType.COLOR_SENSOR);
 			}
 			
-			if(checker.isGoodcColor(s)){
-			
+			if(checker.isLinecColor(s)){
 				fromLineToBorder();
 
-			} else {
-
+			} else if (checker.isBgcColor(s)) {
 				fromBackgroundToBorder();
+
+			} else {
+				
+				halfTurn();
 			}
 		}
 
@@ -115,11 +117,6 @@ public class Engine {
 		sensor.close();
 	}
 	
-	
-	private void go(){
-		
-		run();
-	}
 	
 	// Revenir vers la gauche
 	private void leftCorrection() throws Exception{
