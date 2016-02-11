@@ -29,6 +29,7 @@ public class Engine {
 	private boolean bg_right;			// Indique si le fond est à droite du robot
 	private boolean half_turn_done;
 	private boolean running;
+	private boolean lost;
 	
 	public Engine() throws IOException{
 		
@@ -41,6 +42,7 @@ public class Engine {
 		bg_right = false;
 		half_turn_done = false;
 		running = false;
+		lost = true;
 		
 		left_motor.setSpeed(speed);
 		right_motor.setSpeed(speed);
@@ -84,8 +86,12 @@ public class Engine {
 			
 			if(id_strat == 0){
 				
+				go();
+				Delay.msDelay(1000);
+				s = sensor.fetch(SensorType.COLOR_SENSOR);
+				
 				// On est perdu, donc on avance bêtement
-				while(checker.isLinecColor(s) || checker.isStopcColor(s)){
+				while(checker.isLinecColor(s)){
 					
 					go();
 					s = sensor.fetch(SensorType.COLOR_SENSOR);

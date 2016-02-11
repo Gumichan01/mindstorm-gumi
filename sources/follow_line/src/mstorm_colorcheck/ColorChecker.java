@@ -25,7 +25,7 @@ public class ColorChecker {
 			BufferedReader reader = new BufferedReader(new FileReader("line.gumi")); 
 			BufferedReader rd = new BufferedReader(new FileReader("bg.gumi"));
 			BufferedReader rdht = new BufferedReader(new FileReader("ht.gumi"));
-			BufferedReader rdst = new BufferedReader(new FileReader("st.gumi"));
+			BufferedReader rdst = new BufferedReader(new FileReader("stop.gumi"));
 			
 			for(int i = 0 ; i < NB_COLORS; i++){
 				
