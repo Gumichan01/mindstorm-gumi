@@ -2,6 +2,7 @@ package mstorm_moving;
 
 import java.io.IOException;
 
+import lejos.hardware.Sound;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.port.MotorPort;
@@ -26,6 +27,8 @@ public class Engine {
 	private LightAndColorSensor sensor;
 	private int id_strat;
 	private boolean bg_right;			// Indique si le fond est à droite du robot
+	private boolean half_turn_done;
+	private boolean running;
 	
 	public Engine() throws IOException{
 		
@@ -36,6 +39,8 @@ public class Engine {
 		right_motor = new EV3LargeRegulatedMotor(MotorPort.A);
 		id_strat = 0;
 		bg_right = false;
+		half_turn_done = false;
+		running = false;
 		
 		left_motor.setSpeed(speed);
 		right_motor.setSpeed(speed);
@@ -52,8 +57,9 @@ public class Engine {
 	public void halfTurn() {
 		left_motor.backward();
 		right_motor.forward();
-		Delay.msDelay(2000);
+		Delay.msDelay(1900);
 		bg_right = false;
+		half_turn_done = true;
 	}
 	
 	// Marque l'arrêt du moteur
@@ -72,13 +78,14 @@ public class Engine {
 		// Dump measure
 		sensor.fetch(SensorType.COLOR_SENSOR);
 		float [] s = sensor.fetch(SensorType.COLOR_SENSOR);
+		running = true;
 
-		while((System.currentTimeMillis() - ref_time) < TOTAL_DELAY){
+		while(running){
 			
 			if(id_strat == 0){
 				
 				// On est perdu, donc on avance bêtement
-				while(checker.isLinecColor(s)){
+				while(checker.isLinecColor(s) || checker.isStopcColor(s)){
 					
 					go();
 					s = sensor.fetch(SensorType.COLOR_SENSOR);
@@ -107,9 +114,30 @@ public class Engine {
 			} else if (checker.isBgcColor(s)) {
 				fromBackgroundToBorder();
 
-			} else {
+			} else if (checker.isHalfTurncColor(s)) {
 				
 				halfTurn();
+				id_strat = 0;
+				sensor.fetch(SensorType.COLOR_SENSOR);
+				s = sensor.fetch(SensorType.COLOR_SENSOR);
+				continue;
+				
+			} else if (checker.isStopcColor(s)) {
+				
+				if(half_turn_done){
+					
+					stop();
+					Sound.setVolume(8);
+					Sound.beep(); 
+					Delay.msDelay(250); 
+					Sound.beep();
+					Delay.msDelay(250); 
+					Sound.beep();
+					Delay.msDelay(250); 
+					Sound.beep();
+					Sound.setVolume(0);
+					running = false;
+				}
 			}
 		}
 
