@@ -8,6 +8,7 @@ import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.robotics.RegulatedMotor;
 import lejos.utility.Delay;
+import lejos.utility.Stopwatch;
 import mstorm_colorcheck.ColorChecker;
 import mstorm_sensor.LightAndColorSensor;
 import mstorm_sensor.SensorType;
@@ -20,7 +21,7 @@ public class Engine {
 
 	private final static int angle_run = 360;
 	private final static int angle_rotate = 225;
-	private final static int speed = 225;	// Vitesse du robot
+	private final static int speed = 360;	// Vitesse du robot
 	
 	private RegulatedMotor left_motor, right_motor;
 	private ColorChecker checker;
@@ -155,38 +156,50 @@ public class Engine {
 	// Revenir vers la gauche
 	private void leftCorrection() throws Exception{
 		
+		int sp = speed/2;
 		float [] s = sensor.fetch(SensorType.COLOR_SENSOR); 
-		//left_motor.stop();
-		left_motor.setSpeed(speed/2);
+		left_motor.setSpeed(sp);
+		
+		Stopwatch timer = new Stopwatch();
 		
 		while(!checker.isBorder(s)){
 			
-			right_motor.rotate(angle_rotate,true);
-			left_motor.rotate(angle_rotate,true);
+			if(timer.elapsed() > SECOND){
+				sp--;
+				left_motor.setSpeed(sp);
+			}
+			
+			//right_motor.rotate(angle_rotate,true);
+			//left_motor.rotate(angle_rotate,true);
 			
 			s = sensor.fetch(SensorType.COLOR_SENSOR);
 		}
 		
-		//stop();
 		left_motor.setSpeed(speed);
 	}
 	
 	// Revenir vers la droite
 	private void rightCorrection() throws Exception{
 		
+		int sp = speed/2;
 		float [] s = sensor.fetch(SensorType.COLOR_SENSOR); 
-		//right_motor.stop();
-		right_motor.setSpeed(speed/2);
+		right_motor.setSpeed(sp);
+		
+		Stopwatch timer = new Stopwatch();
 		
 		while(!checker.isBorder(s)){
 			
-			right_motor.rotate(angle_rotate,true);
-			left_motor.rotate(angle_rotate,true);
+			if(timer.elapsed() > SECOND){
+				sp--;
+				left_motor.setSpeed(sp);
+			}
+			
+			//right_motor.rotate(angle_rotate,true);
+			//left_motor.rotate(angle_rotate,true);
 			
 			s = sensor.fetch(SensorType.COLOR_SENSOR);
 		}
 		
-		//stop();
 		right_motor.setSpeed(speed);
 	}	
 	
