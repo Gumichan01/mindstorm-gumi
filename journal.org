@@ -1,3 +1,10 @@
+* ven. mars 11, 2016  1:26
+** Fait:
+   - suivi de ligne (enfin!)
+** A faire:
+   - produire la liste des coordonnées
+   - afficher la trajectoire dans une image.
+** A faire:
 * ven. janv. 29, 2016  1:06
 ** Fait:
    - usage d'un calcul de médiane par très efficace
