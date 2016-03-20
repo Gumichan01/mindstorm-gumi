@@ -6,8 +6,8 @@ Repérer les logiciels pour développer sur la plateforme
 
 Liste des outils candidats:
 
- - LeJOS > http://www.lejos.org/
- - BricxCC > http://bricxcc.sourceforge.net/
+ - [LeJOS](http://www.lejos.org/)
+ - [BricxCC](http://bricxcc.sourceforge.net/)
 
 
 Outil sélectionné: LeJOS
@@ -80,11 +80,11 @@ Si la couleur capter vire vers la ligne -> revenir vers le bord
 
 **Mise à jour : 20 mars 2016  (oui oui c'était long)**
 
-Calcul de la distance parcourue par le robot
+Calcul de la distance parcourue par le robot.
 
-Diamètre de chaque roue : 5,5 cm.
-Rayon de chaque roue    : 2,75 cm.
-Périmètre de la roue    : 17,28 cm.
+- Diamètre de chaque roue : 5,5 cm.
+- Rayon de chaque roue    : 2,75 cm.
+- Périmètre de la roue    : 17,28 cm.
 
 Soit *Vg* et *Vr* les vitesses respectives du moteur gauche et du moteur droit,
 et *t* le temps.
@@ -96,6 +96,6 @@ La distance parcouru par le robot, noté *D*, s'exprime de la manière suivante 
 
 ## Documentations ##
 
- - [Connexion vers le cerveau] (https://github.com/ev3dev/ev3dev/wiki/Setting-Up-Windows-USB-Ethernet-Networking)
- - [API EV3] (http://www.lejos.org/ev3/docs/)
- - [Connexion EV3 obtenir adresse] (http://knowledge.autodesk.com/customer-service/network-license-administration/install-and-configure-network-license/requesting-license-file/finding-your-host-name-and-id)
+ - [Connexion vers le cerveau](https://github.com/ev3dev/ev3dev/wiki/Setting-Up-Windows-USB-Ethernet-Networking)
+ - [API EV3](http://www.lejos.org/ev3/docs/)
+ - [Connexion EV3 : obtenir adresse](http://knowledge.autodesk.com/customer-service/network-license-administration/install-and-configure-network-license/requesting-license-file/finding-your-host-name-and-id)
