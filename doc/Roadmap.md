@@ -93,6 +93,13 @@ La distance parcouru par le robot, noté *D*, s'exprime de la manière suivante 
 
     D = ((Vg + Vr)/2) * t;
 
+***TODO***
+
+- Calcul de la distance parcourue par le robot.
+- Calcul angle pour un moteur qui ne tourne pas et l'autre si.
+- Calcul des coordonnées (dans quel repère ?).
+- Calcul de trajectoire.
+
 
 ## Documentations ##
 
