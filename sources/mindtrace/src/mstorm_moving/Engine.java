@@ -236,6 +236,13 @@ public class Engine {
 		}
 	}
 	
+	
+	public void setSpeed(int lspeed, int rspeed){
+		
+		setSpeed(new int[]{lspeed,rspeed});
+	}
+	
+	
 	protected void setSpeed(int [] sp){
 		
 		if(sp.length == 2){
