@@ -1,5 +1,6 @@
 package main;
 
+
 import mstorm_moving.Engine;
 import mstorm_moving.TestEngine;
 
@@ -9,23 +10,24 @@ public class Mindtrace {
 		
 		try{
 			Engine engine = new TestEngine();
+			long begin_time = 0L, stop_time = 0;
 			
 			engine.setSpeed(0,360);
-			//engine.move();
 			engine.go();
+			begin_time = System.currentTimeMillis();
+
+			while(System.currentTimeMillis() - begin_time < 1000L);
+			
+			engine.stop();
+			stop_time = System.currentTimeMillis();
+			System.out.println("top : " + (stop_time - begin_time));
+			
 			try{
-			
-				//Thread.sleep(1000);
-				//System.out.println(Math.PI);
-				/*System.out.println("Vitesse courante : "+ engine.getSpeed()[0] 
-									+ " " + engine.getSpeed()[1]);*/
-				Thread.sleep(1000);
-				engine.stop();
 				Thread.sleep(4000);
-				engine.close();
 			
-			}catch(Exception e){
+			}finally{
 				///  blabla
+				engine.close();
 			}
 			
 			
