@@ -236,7 +236,7 @@ public class Engine {
 		}
 	}
 	
-	public void setSpeed(int sp_left, int sp_right){
+	public synchronized void setSpeed(int sp_left, int sp_right){
 		
 		setSpeed(new int[]{sp_left,sp_right});
 	}
@@ -252,8 +252,13 @@ public class Engine {
 		
 	}
 	
-	public int [] getSpeed(){
+	public synchronized int [] getSpeed(){
 		
 		return new int[]{left_motor.getSpeed(),left_motor.getSpeed()};
+	}
+	
+	public synchronized Integer [] getSpeedObj(){
+		
+		return new Integer[]{left_motor.getSpeed(),left_motor.getSpeed()};
 	}
 }
