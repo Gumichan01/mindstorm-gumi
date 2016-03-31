@@ -16,11 +16,26 @@ public class Mindtrace {
 
 		try{
 			engine = new TestEngine();
+			RobotstatImplThread stat = new RobotstatImplThread(engine);
 
 			engine.setSpeed(360,360);
+			stat.start();
 			engine.move();
+			RobotstatImplThread.stop = true;
+
+			// TODO Display the distance and the speed
+			System.out.println("min : " + stat.getMinSpeed() + "\n");
+			System.out.println("max : " + stat.getMaxSpeed() + "\n");
+			System.out.println("avg : " + stat.getAvgSpeed() + "\n");
 			
-			// TODO Display the distance and save data in a file
+			try{
+				Thread.sleep(4000);
+			}catch(InterruptedException i){
+				
+				Logger.getAnonymousLogger().log(Level.INFO,
+												"Interrupted main - " + 
+												i.getMessage());
+			}
 			
 		}catch(IOException ie){
 			
