@@ -14,7 +14,7 @@ public class Mindtrace {
 			long begin_time = 0L, stop_time = 0;
 			
 			engine.setSpeed(0,360);
-			engine.go();
+			engine.move();
 			begin_time = System.currentTimeMillis();
 
 			while(System.currentTimeMillis() - begin_time < RUNTIME_DELAY);

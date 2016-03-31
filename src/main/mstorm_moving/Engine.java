@@ -48,7 +48,7 @@ public class Engine {
 	}
 
 	// Faire tourner le moteur
-	public void go()
+	protected void go()
 	{
 		left_motor.forward();
 		right_motor.forward();
