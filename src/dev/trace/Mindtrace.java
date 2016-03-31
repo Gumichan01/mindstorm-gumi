@@ -1,41 +1,41 @@
 package dev.trace;
 
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import main.mstorm_moving.Engine;
 
 public class Mindtrace {
 	
-	private static final long RUNTIME_DELAY = 4000L; 
 	
 	public static void main(String[] args) {
 		
-		try{
-			Engine engine = new TestEngine();
-			long begin_time = 0L, stop_time = 0;
-			
-			engine.setSpeed(0,360);
-			engine.move();
-			begin_time = System.currentTimeMillis();
+		Engine engine = null;
 
-			while(System.currentTimeMillis() - begin_time < RUNTIME_DELAY);
+		try{
+			engine = new TestEngine();
+
+			engine.setSpeed(360,360);
+			engine.move();
 			
-			engine.stop();
-			stop_time = System.currentTimeMillis();
-			System.out.println("top : " + (stop_time - begin_time));
+			// TODO Display the distance and save data in a file
 			
-			// Display the distance and save data in a file
+		}catch(IOException ie){
 			
-			try{
-				Thread.sleep(4000);
-			}
-			finally{
-				engine.close();
-			}
-			
-			
-		}catch(Exception ie){
-			
+			Logger.getAnonymousLogger().log(Level.INFO, "Input exception - " + 
+											ie.getMessage());
 			ie.printStackTrace();
+		}
+		catch(Exception e){
+			
+			Logger.getAnonymousLogger().log(Level.INFO, "Unknown exception - " + 
+											e.getMessage());
+		}
+		finally{
+			
+			engine.close();
 		}
 		
 	}
