@@ -14,12 +14,11 @@ import lejos.hardware.Button;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.LCD;
 
-
 public class HTCalibre {
 
 	public final static int NUMCHANS = 4;
 	public final static String ht_gumi = "ht.gumi";
-	
+
 	public static void main(String [] args) throws IOException{
 
 		float r_avg, g_avg, b_avg;
@@ -31,16 +30,16 @@ public class HTCalibre {
 		int sz = sensor.getRGBMode().sampleSize();
 		sample = new float[NUMCHANS][sz];
 
-		// Mesure à ignorer
+		// Mesure ï¿½ ignorer
 		sensor.fetch(SensorType.COLOR_SENSOR);
-		
+
 		// Color detections
 		for(int i = 0; i <NUMCHANS; i++){
-	
+
 			System.out.println("Waiting for input");
 			Button.DOWN.waitForPressAndRelease();
 			sample[i] = sensor.fetch(SensorType.COLOR_SENSOR);
-			LCD.drawString("Input done. Got : \n"+sample[i][0] + "\n" 
+			LCD.drawString("Input done. Got : \n"+sample[i][0] + "\n"
 								+ sample[i][1] + "\n" + sample[i][2], 0, 0);
 		}
 
@@ -69,15 +68,15 @@ public class HTCalibre {
 			w.flush();
 			w.close();
 			sensor.close();
-			
+
 		}catch(FileNotFoundException fe){
-			
+
 			fe.printStackTrace();
 			sensor.close();
 			throw fe;
-			
+
 		}catch(IllegalFormatException ife){
-		
+
 			ife.printStackTrace();
 			sensor.close();
 			throw ife;
@@ -87,6 +86,5 @@ public class HTCalibre {
 			sensor.close();
 			throw e;
 		}
-
 	}
 }

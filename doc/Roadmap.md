@@ -106,3 +106,11 @@ La distance parcouru par le robot, noté *D*, s'exprime de la manière suivante 
  - [Connexion vers le cerveau](https://github.com/ev3dev/ev3dev/wiki/Setting-Up-Windows-USB-Ethernet-Networking)
  - [API EV3](http://www.lejos.org/ev3/docs/)
  - [Connexion EV3 : obtenir adresse](http://knowledge.autodesk.com/customer-service/network-license-administration/install-and-configure-network-license/requesting-license-file/finding-your-host-name-and-id)
+
+
+**Mise à jour : 02 Avril
+- nettoyage du dépôt
+-abandon du timer pour le duivi de ligne
+- modification et amélioration de la lisibilité du code  
+- débuggage en cours
+-travaille en cours sur les évenements, recherche des infos dans l'api lejos pour avoir une "méthode qui nous donne la distance parcouru selon la vitesse du moteur et la rotation des roues"

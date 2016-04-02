@@ -10,8 +10,7 @@ public class RobotStatImpl implements RobotStat, Observer {
 	private float max_speed = 0.0f;
 	private float avg_speed = 0.0f;
 	private float distance = 0.0f;
-	
-	
+
 	@Override
 	public float getMaxSpeed() {
 
@@ -38,8 +37,7 @@ public class RobotStatImpl implements RobotStat, Observer {
 
 	@Override
 	public void update(Observable o, Object arg){
-		
-		
+			
 	}
-	
+
 }

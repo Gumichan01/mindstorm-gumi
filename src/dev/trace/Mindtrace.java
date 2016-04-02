@@ -8,10 +8,9 @@ import java.util.logging.Logger;
 import main.mstorm_moving.Engine;
 
 public class Mindtrace {
-	
-	
+
 	public static void main(String[] args) {
-		
+
 		Engine engine = null;
 
 		try{
@@ -27,32 +26,30 @@ public class Mindtrace {
 			System.out.println("min : " + stat.getMinSpeed() + "\n");
 			System.out.println("max : " + stat.getMaxSpeed() + "\n");
 			System.out.println("avg : " + stat.getAvgSpeed() + "\n");
-			
+
 			try{
 				Thread.sleep(4000);
 			}catch(InterruptedException i){
 				
 				Logger.getAnonymousLogger().log(Level.INFO,
-												"Interrupted main - " + 
+												"Interrupted main - " +
 												i.getMessage());
 			}
-			
+
 		}catch(IOException ie){
-			
-			Logger.getAnonymousLogger().log(Level.INFO, "Input exception - " + 
+
+			Logger.getAnonymousLogger().log(Level.INFO, "Input exception - " +
 											ie.getMessage());
 			ie.printStackTrace();
 		}
 		catch(Exception e){
-			
-			Logger.getAnonymousLogger().log(Level.INFO, "Unknown exception - " + 
+
+			Logger.getAnonymousLogger().log(Level.INFO, "Unknown exception - " +
 											e.getMessage());
 		}
 		finally{
-			
 			engine.close();
 		}
-		
-	}
 
+	}
 }
