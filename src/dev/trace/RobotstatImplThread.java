@@ -13,9 +13,9 @@ public class RobotstatImplThread extends Thread implements RobotStat{
 
 	public static volatile boolean stop = false;
 	private static float ANGLE_2PI = 360.0f;
-	private static float DISTANCE_2PI = 0.1728f;	// meter (calculated)
+	private static float DISTANCE_2PI = 0.17165f;	// meter (calculated)
 	private int DELAY = 33;
-
+	
 	ArrayList<Integer[]> speeds;
 	private int count = 0;
 	private float min_speed = 0.0f;
@@ -23,13 +23,13 @@ public class RobotstatImplThread extends Thread implements RobotStat{
 	private float avg_speed = 0.0f;
 	private float distance = 0.0f;
 	Engine engine;
-
+	
 	public RobotstatImplThread(Engine en){
-
+		
 		engine = en;
 		speeds = new ArrayList<>();
 	}
-
+	
 	@Override
 	public float getMaxSpeed() {
 
@@ -53,68 +53,69 @@ public class RobotstatImplThread extends Thread implements RobotStat{
 
 		return distance;
 	}
-
+	
 	private void addSpeeds(){
-
+		
 		float velocity;
 		float vg,vd;
 		Integer [] sp = engine.getSpeedObj();
 		speeds.add(sp);	// Atomic
-
+		
 		vg = (sp[0] * DISTANCE_2PI) / ANGLE_2PI;
 		vd = (sp[1] * DISTANCE_2PI) / ANGLE_2PI;
-
+		
 		velocity = (vg + vd) / 2.0f;
-
+		
 		if(velocity > max_speed)
 			max_speed = velocity;
-
+		
 		if(velocity < min_speed)
 			min_speed = velocity;
-
+		
 		// TODO distance -> velocity * t (t is a moment)
 		count++;
 		avg_speed += velocity/count;
-
+		
 	}
 
 	@Override
 	public void run(){
-
+		
 		PrintWriter w = null;
-
+		
 		while(!stop){
-
+			
 			try{
 				Thread.sleep(DELAY);
 			} catch (InterruptedException in){
-
-				Logger.getAnonymousLogger().log(Level.INFO, "Interrupted - " +
+				
+				Logger.getAnonymousLogger().log(Level.INFO, "Interrupted - " + 
 						in.getMessage());
 			}
-
+			
 			addSpeeds();
 		}
+		
 
 		try{
 
 			w = new PrintWriter(new File("statT.gumi"));
-
-			for(Integer [] t : speeds){
-
+			
+			for(Integer [] t : speeds)
+			{
 				w.printf("%d %d\n", t[0],t[1]);
 				w.flush();
 			}
 
 		}catch(FileNotFoundException e){
-
-			Logger.getAnonymousLogger().log(Level.INFO, "File not found - " +
+			
+			Logger.getAnonymousLogger().log(Level.INFO, "File not found - " + 
 					e.getMessage());
-
+		
 		}finally{
+
 			if(w != null)
 				w.close();
 		}
-
 	}
 }
