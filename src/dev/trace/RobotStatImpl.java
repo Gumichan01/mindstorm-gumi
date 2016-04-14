@@ -17,8 +17,9 @@ public class RobotStatImpl implements RobotStat, Observer {
 	public static volatile boolean stop = false;
 	private static float ANGLE_2PI = 360.0f;
 	private static float DISTANCE_2PI = 0.17165f;	// meter (calculated)
+	public static boolean first_stat = true;
 	
-	private ArrayList<Integer[]> speeds;
+	private ArrayList<RobotDatum> speed_data;
 	private int count = 0;
 	private long current_time;
 	private float min_speed = 0.0f;
@@ -28,8 +29,7 @@ public class RobotStatImpl implements RobotStat, Observer {
 
 	public RobotStatImpl(){
 		
-		speeds = new ArrayList<>();
-		current_time = System.currentTimeMillis();
+		speed_data = new ArrayList<>();
 	}
 	
 	
@@ -61,7 +61,7 @@ public class RobotStatImpl implements RobotStat, Observer {
 	public void update(Observable o, Object arg){
 		
 		Engine en = (Engine) o;
-		addSpeeds(en);
+		newData(en);
 		
 		if(arg != null){
 			
@@ -78,9 +78,9 @@ public class RobotStatImpl implements RobotStat, Observer {
 
 			w = new PrintWriter(new File("statO.gumi"));
 			
-			for(Integer [] t : speeds){
+			for(RobotDatum rd : speed_data){
 				
-				w.printf("%d %d\n", t[0],t[1]);
+				w.print(rd.toString());
 				w.flush();
 			}
 
@@ -96,19 +96,26 @@ public class RobotStatImpl implements RobotStat, Observer {
 		}
 	}
 	
-	private void addSpeeds(Engine engine){
+	private void newData(Engine engine){
 
 		long t;
 		float vl,vr;
 		float velocity;
 		Integer [] sp = engine.getSpeedObj();
 
-		t = System.currentTimeMillis() - current_time;
-		//speeds.add(sp);
+		if(first_stat){
+		
+			t = 0;
+			current_time = System.currentTimeMillis();
+			first_stat = false;
+		}
+		else
+			t = System.currentTimeMillis() - current_time;
+		
+		speed_data.add(new RobotDatum(sp[0], sp[1], t));
 
 		vl = (sp[0] * DISTANCE_2PI) / ANGLE_2PI;
 		vr = (sp[1] * DISTANCE_2PI) / ANGLE_2PI;
-
 		velocity = (vl + vr) / 2.0f;
 
 		if(velocity > max_speed)
