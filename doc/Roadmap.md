@@ -15,9 +15,9 @@ Outil sélectionné: LeJOS
 ## Journal ##
 
 **Mise à jour : 19 novembre**
- -l'étalonnage ne marche pas, des difficultés à comprendre et à le programmer.
- -le robot perçois qu'une "trame de couleur" mais pas totalement, il ne s'adapte pas à
-la lumibnosité
+ - l'étalonnage ne marche pas, des difficultés à comprendre et à le programmer.
+ - le robot perçoit qu'une "trame de couleur" mais pas totalement,
+ il ne s'adapte pas à la luminosité
 
 **Mise à jour : 20 novembre 2015**
 - des difficultés dans la detection des couleurs plus précisement faire l'étalonnage.
@@ -80,11 +80,11 @@ Si la couleur capter vire vers la ligne -> revenir vers le bord
 
 **Mise à jour : 20 mars 2016  (oui oui c'était long)**
 
-Calcul de la distance parcourue par le robot.
+> Calcul de la distance parcourue par le robot.
 
-- Diamètre de chaque roue : 5,5 cm.
-- Rayon de chaque roue    : 2,75 cm.
-- Périmètre de la roue    : 17,28 cm.
+Pour cd calcul on mesure la distance parcourue par le robot pendant 10 secondes, puis on la divise par 10 pour avoir la distance paroucure par le robot en 1 seconde.
+
+- Distance (par seconde) : 17,165 cm.
 
 Soit *Vg* et *Vr* les vitesses respectives du moteur gauche et du moteur droit,
 et *t* le temps.
@@ -93,9 +93,49 @@ La distance parcouru par le robot, noté *D*, s'exprime de la manière suivante 
 
     D = ((Vg + Vr)/2) * t;
 
+**Mise à jour : 14 avril 2016 **
+
+> Mesure de la vitesse des roues
+
+  La mesure de la vitesse de chaque roue (vitesse angulaire) a été faite via 2 méthodes:
+
+- Solution 1 : Mesure continue active (dans un thread à part).
+- Solution 2 : Mesure passive en se basant sur les mises à jour.
+
+ La première méthode, permet d'avoir un "bon" suivi
+dans la mesure où on connait les instants dans
+lesquels les mesures sont effectuées étaient connues.
+Sachant que l'on définit un certain nombre de mesures par seconde,
+on peut aisément déterminer à quel moment le temps de parcours dépasse une seconde.
+ Cependant, cette méthode présente un inconvénient. En effet, cela
+ engendre beaucoup de mesures identiques inutiles
+ ainsi qu'une consommation plus importante des ressources.
+
+  La deuxième méthode, quant à elle, se base juste sur la mise
+à jour des vitesses. Dès un changement a lieu. une notification
+se fait sur l'outils de mesure qui va récupérer les mise à jour.
+Pour autant, on perd l'information sur le moment où le robot
+effectue les changement de viteses sur les roues. Il faudra donc à
+chaque notification enregistrer l'instant où les nouvelles vitesses
+sont appliquées.
+
+La solution retenu est la solution 2.
+
+> Sémantique
+
+Soit l'outils de mesure que l'on nommera *RStat*
+
+   *RStat* enregistre les données dans une liste.
+Cette liste est mise à jour à chaque fois qu'une nouvelle entrée est capté par *RStat*.
+Chaque donnée est défini par le  triplet :
+- ***(vg,vd,t)***
+
+où ***vg*** et ***vd*** sont respectivement les vitesses angulaires des roues gauche et droite, et ***t*** l'instant à partir duquel les vitesses sont appliquées.
+
+Lorsque le robot termine sont parcours, *RStat* enregistre les données captées dans un fichier *statO.gumi*.
+
 ***TODO***
 
-- Calcul de la distance parcourue par le robot.
 - Calcul angle pour un moteur qui ne tourne pas et l'autre si.
 - Calcul des coordonnées (dans quel repère ?).
 - Calcul de trajectoire.
@@ -111,6 +151,6 @@ La distance parcouru par le robot, noté *D*, s'exprime de la manière suivante 
 **Mise à jour : 02 Avril
 - nettoyage du dépôt
 -abandon du timer pour le duivi de ligne
-- modification et amélioration de la lisibilité du code  
+- modification et amélioration de la lisibilité du code
 - débuggage en cours
 -travaille en cours sur les évenements, recherche des infos dans l'api lejos pour avoir une "méthode qui nous donne la distance parcouru selon la vitesse du moteur et la rotation des roues"
