@@ -17,6 +17,8 @@ import main.mstorm_sensor.SensorType;
 
 public class Engine extends Observable {
 	
+	public static boolean half_turning;
+	
 	protected final static long DPS = 60;			// Detection par seconde
 	protected final static long SECOND = 1000;		// 1 seconde
 	protected final static long TOTAL_DELAY = 30000;
@@ -46,6 +48,7 @@ public class Engine extends Observable {
 		id_strat = 0;
 		bg_right = false;
 		half_turn_done = false;
+		half_turning = false;
 		running = false;
 		observer = null;
 	}
@@ -54,7 +57,7 @@ public class Engine extends Observable {
 		
 		this();
 		observer = obs;
-		observer.update(this, null);
+		setSpeed(0, 0);
 	}
 	
 
@@ -62,12 +65,12 @@ public class Engine extends Observable {
 	{
 		left_motor.forward();
 		right_motor.forward();
-		update();
 	}
 	
 
 	public void halfTurn() {
 		
+		half_turning = true;
 		left_motor.backward();
 		right_motor.forward();
 		update();
@@ -75,6 +78,7 @@ public class Engine extends Observable {
 		Delay.msDelay(1900);
 		bg_right = false;
 		half_turn_done = true;
+		half_turning = false;
 	}
 	
 
@@ -82,13 +86,13 @@ public class Engine extends Observable {
 
 		left_motor.stop(true);
 		right_motor.stop(true);
+		left_motor.setSpeed(0);
+		right_motor.setSpeed(0);
 		lastUpdate();
 	}
 	
 	public void close(){
 		
-		stop();
-		update();
 		sensor.close();
 	}
 
