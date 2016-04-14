@@ -22,11 +22,11 @@ public class Mindtrace {
 			engine.move();
 			RobotstatImplThread.stop = true;
 
-			// TODO Display the distance and the speed
 			System.out.println("min : " + stat.getMinSpeed() + "\n");
 			System.out.println("max : " + stat.getMaxSpeed() + "\n");
 			System.out.println("avg : " + stat.getAvgSpeed() + "\n");
-			Delay.msDelay(1000);
+			System.out.println("distance : " + stat.getDistance() + "\n");
+			Delay.msDelay(8000);
 			
 		}catch(IOException ie){
 			
