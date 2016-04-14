@@ -18,8 +18,9 @@ public class RobotStatImpl implements RobotStat, Observer {
 	private static float ANGLE_2PI = 360.0f;
 	private static float DISTANCE_2PI = 0.17165f;	// meter (calculated)
 	
-	ArrayList<Integer[]> speeds;
+	private ArrayList<Integer[]> speeds;
 	private int count = 0;
+	private long current_time;
 	private float min_speed = 0.0f;
 	private float max_speed = 0.0f;
 	private float avg_speed = 0.0f;
@@ -28,6 +29,7 @@ public class RobotStatImpl implements RobotStat, Observer {
 	public RobotStatImpl(){
 		
 		speeds = new ArrayList<>();
+		current_time = System.currentTimeMillis();
 	}
 	
 	
@@ -68,7 +70,7 @@ public class RobotStatImpl implements RobotStat, Observer {
 			
 	}
 	
-	public void saveData(){
+	protected void saveData(){
 		
 		PrintWriter w = null;
 		
@@ -95,26 +97,29 @@ public class RobotStatImpl implements RobotStat, Observer {
 	}
 	
 	private void addSpeeds(Engine engine){
-		
+
+		long t;
+		float vl,vr;
 		float velocity;
-		float vg,vd;
 		Integer [] sp = engine.getSpeedObj();
-		speeds.add(sp);	// Atomic
-		
-		vg = (sp[0] * DISTANCE_2PI) / ANGLE_2PI;
-		vd = (sp[1] * DISTANCE_2PI) / ANGLE_2PI;
-		
-		velocity = (vg + vd) / 2.0f;
-		
+
+		t = System.currentTimeMillis() - current_time;
+		//speeds.add(sp);
+
+		vl = (sp[0] * DISTANCE_2PI) / ANGLE_2PI;
+		vr = (sp[1] * DISTANCE_2PI) / ANGLE_2PI;
+
+		velocity = (vl + vr) / 2.0f;
+
 		if(velocity > max_speed)
 			max_speed = velocity;
-		
+
 		if(velocity < min_speed)
 			min_speed = velocity;
-		
-		// TODO distance -> velocity * t (t is a moment)
+
 		count++;
 		avg_speed += velocity/count;
+		distance += velocity * t;
 		
 	}
 }
