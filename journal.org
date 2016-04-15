@@ -1,3 +1,8 @@
+Ven 15 avr 2016 14:08:06 CEST
+**A FAIRE
+	récupérer les données depuis le robot
+	afficher les données
+
 * ven. avril 1, 2016
 ** Fait:
    - capture les vitesses
