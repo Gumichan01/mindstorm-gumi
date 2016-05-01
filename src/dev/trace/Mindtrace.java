@@ -20,7 +20,6 @@ public class Mindtrace {
 
 			engine.setSpeed(360,360);
 			engine.move();
-			RobotstatImplThread.stop = true;
 
 			System.out.println("min : " + stat.getMinSpeed() + "\n");
 			System.out.println("max : " + stat.getMaxSpeed() + "\n");
@@ -41,7 +40,8 @@ public class Mindtrace {
 		}
 		finally{
 			
-			engine.close();
+			if(engine != null)
+				engine.close();
 		}
 		
 	}

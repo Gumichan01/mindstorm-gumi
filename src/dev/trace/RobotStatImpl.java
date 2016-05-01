@@ -111,8 +111,11 @@ public class RobotStatImpl implements RobotStat, Observer {
 		}
 		else
 			t = System.currentTimeMillis() - current_time;
-		
-		speed_data.add(new RobotDatum(sp[0], sp[1], t));
+	
+		if(Engine.half_turning)
+			speed_data.add(new RobotDatum(-sp[0], sp[1], t));
+		else
+			speed_data.add(new RobotDatum(sp[0], sp[1], t));
 
 		vl = (sp[0] * DISTANCE_2PI) / ANGLE_2PI;
 		vr = (sp[1] * DISTANCE_2PI) / ANGLE_2PI;

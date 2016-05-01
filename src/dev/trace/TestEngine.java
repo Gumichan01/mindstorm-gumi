@@ -16,15 +16,11 @@ public class TestEngine extends Engine{
 	public TestEngine() throws IOException {
 		super();
 
-		System.out.println("Default Speed : (" + left_motor.getSpeed() + "," 
-							+ right_motor.getSpeed() + ")");
 	}
 	
 	public TestEngine(Observer o) throws IOException {
 		super(o);
 
-		System.out.println("Default Speed : (" + left_motor.getSpeed() + "," 
-							+ right_motor.getSpeed() + ")");
 	}
 	
 	@Override
@@ -49,7 +45,7 @@ public class TestEngine extends Engine{
 		setSpeed(DEFAULT_SPEED,DEFAULT_SPEED);
 		while(System.currentTimeMillis() - ref_time < LINE_DELAY);
 		
-		setSpeed(HT_SPEED,HT_SPEED);
+		//setSpeed(HT_SPEED,HT_SPEED);
 		halfTurn();
 		stop();
 		//end_time = System.currentTimeMillis();
