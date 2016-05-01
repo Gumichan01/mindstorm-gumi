@@ -134,10 +134,37 @@ où ***vg*** et ***vd*** sont respectivement les vitesses angulaires des roues g
 
 Lorsque le robot termine sont parcours, *RStat* enregistre les données captées dans un fichier *statO.gumi*.
 
+
+**Mise à jour : 1er mai 2016  (oui oui c'était aussi long)**
+
+Récupération des données effectuée.
+
+Exemple de données lues :
+
+    0 0 0
+    360 360 30
+    360 240 2035
+    180 360 3537
+    360 360 6535
+    -360 360 8539
+    0 0 10449
+
+Chaque ligne correspond eu triplet ***(vg,vd,t)*** spécifié plus haut
+
+Le but est d'avoir les coordonnées du robot à partir de ces données et d'effectuer
+un calcul de trajectoire.
+
+> Ces données sont-elles suffisantes ?
+
+Peut-être pas, il est possible de connaitre les coordonnées du robot à tout moment,
+mais cela n'a pas encore été testé (à faire).
+
+On devra modifier les données pour avoir quelque chose comme
+***(x,y,vg,vd,t)*** , *x* et *y* sqont les cordonnées du robot.
+
 ***TODO***
 
-- Calcul angle pour un moteur qui ne tourne pas et l'autre si.
-- Calcul des coordonnées (dans quel repère ?).
+- Tenter de récupérer les coordonnées.
 - Calcul de trajectoire.
 
 
