@@ -80,16 +80,16 @@ Si la couleur capter vire vers la ligne -> revenir vers le bord
 
 **Mise à jour : 20 mars 2016  (oui oui c'était long)**
 
-> Calcul de la distance parcourue par le robot.
+> Calcul de la distance parcouruee par le robot.
 
-Pour cd calcul on mesure la distance parcourue par le robot pendant 10 secondes, puis on la divise par 10 pour avoir la distance paroucure par le robot en 1 seconde.
+Pour cd calcul on mesure la distance parcouruee par le robot pendant 10 secondes, puis on la divise par 10 pour avoir la distance paroucure par le robot en 1 seconde.
 
 - Distance (par seconde) : 17,165 cm.
 
-Soit *Vg* et *Vr* les vitesses respectives du moteur gauche et du moteur droit,
+Soient *Vg* et *Vr* les vitesses respectives du moteur gauche et du moteur droit,
 et *t* le temps.
 
-La distance parcouru par le robot, noté *D*, s'exprime de la manière suivante :
+La distance parcourue par le robot, noté *D*, s'exprime de la manière suivante :
 
     D = ((Vg + Vr)/2) * t;
 
@@ -166,6 +166,124 @@ comme ***(x,y,vg,vd,t)***. *x* et *y* ssont les cordonnées du robot.
 
 - Tenter de récupérer les coordonnées.
 - Calcul de trajectoire.
+
+
+**Mise à jour : 11 mai 2016**
+
+> Petite mise au point (pour ne pas être perdu) :
+
+- distance *dr* parcouruee par le robot (par seconde) : 17,165 cm.
+
+  Cette distance a été obtenue à partir d'une vitese angulaire de 360°.s-¹.
+Méthode de mesure : on fait avancer le robot pendant 10 secondes, on mesure
+la distance parcourue et on divise la valeur par 10.
+
+Soient *Vg* et *Vd* les vitesses respectives du moteur gauche et du moteur droit,
+et *t* le temps.
+
+Soient *VRg* et *VRd* les vitesses angulaires respectives du moteur gauche et
+du moteur droit.
+
+Sachant qu'avec une vitesse angulaire *Va* de 360°.s-¹, on a la distance *d*,
+à partir du tableau suivant :
+
+|  Va   |   dr  |
+|-------|-------|
+|  360  | 17,165|
+|   v   |   d   |
+
+Il est possible, en connaissant la vitesse angulaire *v* de déterminer la vitesse
+angulaire *d*.
+
+Dans le cas où on a les données suivantes :
+
+    360 240 2035
+    180 360 3537
+
+
+On a :
+
+ - VRg = 360°.s-¹.
+ - VRd = 240°.s-¹.
+
+On obtient donc :
+
+ - Vg = 17,165 cm.s-¹.
+ - Vd = 240 * 17,165 / 360 = 11.443 cm.s-¹.
+
+
+La vitesse *Vr* suivante du robot, s'exprime ainsi :
+
+    Vr = (Vg + Vd)/2
+
+
+Avec les valeurs calculée de *Vg* et *Vd*, on a donc :
+
+    Vr = (Vg + Vd)/2
+    Vr = (17.165 + 11.443)/2
+    Vr = 14.299 cm.s-¹
+
+
+*t* correspond au temps durant lequel le robot a roulé à ces vitesses.  
+En l'occurrence, on a :
+
+    t = 3537 - 2035
+    t = 1502 ms
+    t = 1,502 s
+
+
+La distance parcourue par le robot, noté *D*, s'exprime de la manière suivante :
+
+    D = Vr * t;
+
+On a donc :
+
+    D = 14.299 * 1.502
+    D = 21.477 cm
+
+Le robot a donc parcouru 21.477 cm.
+
+
+> Calcul de trajectoire :
+
+Soient *T*, l'angle du robot lorsqu'il tourne, *Dg* la distance parcourue par
+la roue gauche, *Dd* la distance parcourue par la roue droite. et *L* la largeur
+du robot. On a cette formule (que je ne parviens pas à comprendre) :
+
+    T = (Dg - Dd) / L ①
+
+Cette formule semble juste, mais le raisonnementest rrop bancal pour en attester.
+
+> Raisonnement
+
+Dans le cas présent, on peut mesurer la distance parcourue par chaque roue.
+Soient *Dg* la distance parcourue la la roue gauche
+et *Dd* la distance parcourue par la roue droite.
+
+    Dg = 17.165 cm
+    Dd = 11.443 cm
+
+*Dg > Dd*, donc on peut donc dire, au vu du virage que prend le robot (à droite),
+on a :
+
+    Dg = r.T    // r est le rayon du point de référence
+    Dd = (r - L). - T
+
+Donc on a :
+
+    r - L = Dd / T
+    r     = (Dd / T)  + L
+
+Donc, d'après la formule ①, on a:
+
+    ① <=> (T = r.T - (r - L).T) / L
+    ① <=> T.(r - (r - L)) / L
+    ① <=> T.(r - r + L)) / L
+    ① <=> T.L / L
+    ① <=> T
+
+On retrouve bien *T* a droite. Oui, ce raisonnement est "bizarre",
+mais le résultat ne contredit pas la formule à prouver.
 
 
 ## Documentations ##
