@@ -13,6 +13,23 @@ public class RobotDatum {
 		this.t = t;
 	}
 	
+	
+	public int getVL()
+	{
+		return vl;
+	}
+
+	public int getVR()
+	{
+		return vr;
+	}
+
+	public long getTime()
+	{
+		return t;
+	}
+	
+	
 	@Override
 	public String toString(){
 		
