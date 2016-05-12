@@ -184,7 +184,7 @@ et *t* le temps.
 Soient *VRg* et *VRd* les vitesses angulaires respectives du moteur gauche et
 du moteur droit.
 
-Sachant qu'avec une vitesse angulaire *Va* de 360°.s-¹, on a la distance *d*,
+Sachant qu'avec une vitesse angulaire *Va* de 360°.s-¹, on a la distance *dr*,
 à partir du tableau suivant :
 
 |  Va   |   dr  |
@@ -192,8 +192,8 @@ Sachant qu'avec une vitesse angulaire *Va* de 360°.s-¹, on a la distance *d*,
 |  360  | 17,165|
 |   v   |   d   |
 
-Il est possible, en connaissant la vitesse angulaire *v* de déterminer la vitesse
-angulaire *d*.
+Il est possible, en connaissant la vitesse angulaire *v* de déterminer
+la distance *d*.
 
 Dans le cas où on a les données suivantes :
 
@@ -224,7 +224,7 @@ Avec les valeurs calculée de *Vg* et *Vd*, on a donc :
     Vr = 14.299 cm.s-¹
 
 
-*t* correspond au temps durant lequel le robot a roulé à ces vitesses.  
+*t* correspond au temps durant lequel le robot a roulé à ces vitesses.
 En l'occurrence, on a :
 
     t = 3537 - 2035
