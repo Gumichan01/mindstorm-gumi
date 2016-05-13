@@ -10,7 +10,7 @@ public class AngleTest {
 		ArrayList<RobotDatum> rl = new ArrayList<>();
 		
 		rl.add(new RobotDatum(360, 0, 0));
-		rl.add(new RobotDatum(0, 0, 2000));
+		rl.add(new RobotDatum(0, 0, 1000));
 		//rl.add(new RobotDatum(360, 360, 30));
 		//rl.add(new RobotDatum(360, 240, 2035));
 		//rl.add(new RobotDatum(180, 360, 3537));

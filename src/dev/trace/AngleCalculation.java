@@ -6,7 +6,7 @@ public class AngleCalculation {
 
 	private static final float DISTANCE_2PI = 0.17165f;	// meter
 	private static final int PI_2 = 360;
-	private static final float L = 0.10f;				// meter
+	private static final float L = 0.1438f;				// meter
 	
 	ArrayList<Float> theta_list;
 	
@@ -29,12 +29,11 @@ public class AngleCalculation {
 				// seconds
 				float difft = (rl.get(i+1).getTime() - rl.get(i).getTime()) / 1000f;
 				/* Is that correct ? */
-				darray[0] *= difft;
-				darray[1] *= difft;
+				darray[0] = varray[0] * difft;
+				darray[1] = varray[1] * difft;
 			}
 
 			float theta = (darray[0] - darray[1]) / L;
-			
 			theta_list.add(theta);
 		}
 	}
