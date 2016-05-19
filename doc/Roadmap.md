@@ -208,8 +208,8 @@ On a :
 
 On obtient donc :
 
- - Vg = 17,165 cm.s-¹.
- - Vd = 240 * 17,165 / 360 = 11.443 cm.s-¹.
+ - Vg = 0.17165 m.s-¹.
+ - Vd = 240 * 0.17165 / 360 = 0.11443 m.s-¹.
 
 
 La vitesse *Vr* suivante du robot, s'exprime ainsi :
@@ -220,8 +220,8 @@ La vitesse *Vr* suivante du robot, s'exprime ainsi :
 Avec les valeurs calculée de *Vg* et *Vd*, on a donc :
 
     Vr = (Vg + Vd)/2
-    Vr = (17.165 + 11.443)/2
-    Vr = 14.299 cm.s-¹
+    Vr = (0.17165 + 0.11443)/2
+    Vr = 0.14299 m.s-¹
 
 
 *t* correspond au temps durant lequel le robot a roulé à ces vitesses.
@@ -238,8 +238,8 @@ La distance parcourue par le robot, noté *D*, s'exprime de la manière suivante
 
 On a donc :
 
-    D = 14.299 * 1.502
-    D = 21.477 cm
+    D = .014299 * 1.502
+    D = 0.21477 m
 
 Le robot a donc parcouru 21.477 cm.
 
@@ -248,11 +248,13 @@ Le robot a donc parcouru 21.477 cm.
 
 Soient *T*, l'angle du robot lorsqu'il tourne, *Dg* la distance parcourue par
 la roue gauche, *Dd* la distance parcourue par la roue droite. et *L* la largeur
-du robot. On a cette formule (que je ne parviens pas à comprendre) :
+du robot. On a cette formule :
 
-    T = (Dg - Dd) / L ①
+    L = 0.1438 m
+    Θ = (Dg - Dd) / L ①     // Θ est en radian
 
-Cette formule semble juste, mais le raisonnementest rrop bancal pour en attester.
+Cette formule semble juste, mais le raisonnement est trop bancal pour en attester.
+
 
 > Raisonnement
 
@@ -260,29 +262,29 @@ Dans le cas présent, on peut mesurer la distance parcourue par chaque roue.
 Soient *Dg* la distance parcourue la la roue gauche
 et *Dd* la distance parcourue par la roue droite.
 
-    Dg = 17.165 cm
-    Dd = 11.443 cm
+    Dg = 0.17165 m
+    Dd = 0.11443 m
 
 *Dg > Dd*, donc on peut donc dire, au vu du virage que prend le robot (à droite),
 on a :
 
-    Dg = r.T    // r est le rayon du point de référence
-    Dd = (r - L). - T
+    Dg = r.Θ    // r est le rayon du point de référence
+    Dd = (r - L). - Θ
 
 Donc on a :
 
-    r - L = Dd / T
-    r     = (Dd / T)  + L
+    r - L = Dd / Θ
+    r     = (Dd / Θ)  + L
 
 Donc, d'après la formule ①, on a:
 
-    ① <=> (T = r.T - (r - L).T) / L
-    ① <=> T.(r - (r - L)) / L
-    ① <=> T.(r - r + L)) / L
-    ① <=> T.L / L
-    ① <=> T
+    ① <=> (r.Θ - (r - L).Θ) / L
+    ① <=> Θ.(r - (r - L)) / L
+    ① <=> Θ.(r - r + L)) / L
+    ① <=> Θ.L / L
+    ① <=> Θ
 
-On retrouve bien *T* a droite. Oui, ce raisonnement est "bizarre",
+On retrouve bien *Θ* a droite. Oui, ce raisonnement est "bizarre",
 mais le résultat ne contredit pas la formule à prouver.
 
 
