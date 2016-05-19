@@ -1,5 +1,16 @@
-Ven 15 avr 2016 14:08:06 CEST
-**A FAIRE
+* ven. mai 13, 2016  2:17
+** Fait:
+   - récupération des données
+** A faire:
+   - le calcul de la trajectoire est à finir:
+     tester votre formule
+   - decodage
+   - le choix d'une direction sur un carrefour
+   - nettoyer votre code
+   - préparer la soutenance
+
+* Ven 15 avr 2016 14:08:06 CEST
+** A FAIRE
 	récupérer les données depuis le robot
 	afficher les données
 
