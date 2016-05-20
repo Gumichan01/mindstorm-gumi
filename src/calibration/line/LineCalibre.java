@@ -14,11 +14,12 @@ import lejos.hardware.Button;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.utility.Delay;
 
+
 public class LineCalibre {
 
 	public final static int NUMCHANS = 10;
 	public final static String line_gumi = "line.gumi";
-
+	
 	public static void main(String [] args) throws IOException{
 
 		float r_avg, g_avg, b_avg;
@@ -30,15 +31,15 @@ public class LineCalibre {
 		int sz = sensor.getRGBMode().sampleSize();
 		sample = new float[NUMCHANS][sz];
 
-		// Mesure � ignorer
+		// Ignore that
 		sensor.fetch(SensorType.COLOR_SENSOR);
-
+		
 		for(int i = 0; i <NUMCHANS; i++){
-
+	
 			System.out.println("Waiting for input");
 			Button.DOWN.waitForPressAndRelease();
 			sample[i] = sensor.fetch(SensorType.COLOR_SENSOR);
-			System.out.println("Input done. Got : \n"+sample[i][0] + "\n"
+			System.out.println("Input done. Got : \n"+sample[i][0] + "\n" 
 								+ sample[i][1] + "\n" + sample[i][2]);
 			Delay.msDelay(500);
 		}
@@ -66,23 +67,24 @@ public class LineCalibre {
 			w.flush();
 			w.close();
 			sensor.close();
-
+			
 		}catch(FileNotFoundException fe){
-
+			
 			fe.printStackTrace();
 			sensor.close();
 			throw fe;
-
+			
 		}catch(IllegalFormatException ife){
-
+		
 			ife.printStackTrace();
 			sensor.close();
 			throw ife;
 		}catch (IOException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 			sensor.close();
 			throw e;
 		}
+
 	}
 }

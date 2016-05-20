@@ -14,11 +14,12 @@ import lejos.hardware.Button;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.LCD;
 
+
 public class BgCalibre {
 
 	public final static int NUMCHANS = 10;
 	public final static String bg_gumi = "bg.gumi";
-
+	
 	public static void main(String [] args) throws IOException{
 
 		float r_avg, g_avg, b_avg;
@@ -30,16 +31,16 @@ public class BgCalibre {
 		int sz = sensor.getRGBMode().sampleSize();
 		sample = new float[NUMCHANS][sz];
 
-		// Mesure � ignorer
+		// Ignore that
 		sensor.fetch(SensorType.COLOR_SENSOR);
-
+		
 		// Color detections
 		for(int i = 0; i <NUMCHANS; i++){
-
+	
 			System.out.println("Waiting for input");
 			Button.DOWN.waitForPressAndRelease();
 			sample[i] = sensor.fetch(SensorType.COLOR_SENSOR);
-			LCD.drawString("Input done. Got : \n"+sample[i][0] + "\n"
+			LCD.drawString("Input done. Got : \n"+sample[i][0] + "\n" 
 								+ sample[i][1] + "\n" + sample[i][2], 0, 0);
 		}
 
@@ -59,24 +60,21 @@ public class BgCalibre {
 		b_avg /= NUMCHANS;
 
 		try{
-			// Delete the file
-			new File(bg_gumi).delete();
-			new FileWriter(new File(bg_gumi)).close();
 
 			PrintWriter w = new PrintWriter(new BufferedWriter(new FileWriter(bg_gumi, false)));
 			w.printf("%.9g\n%.9g\n%.9g\n",r_avg,g_avg,b_avg);
 			w.flush();
 			w.close();
 			sensor.close();
-
+			
 		}catch(FileNotFoundException fe){
-
+			
 			fe.printStackTrace();
 			sensor.close();
 			throw fe;
-
+			
 		}catch(IllegalFormatException ife){
-
+		
 			ife.printStackTrace();
 			sensor.close();
 			throw ife;
@@ -86,5 +84,6 @@ public class BgCalibre {
 			sensor.close();
 			throw e;
 		}
+
 	}
 }

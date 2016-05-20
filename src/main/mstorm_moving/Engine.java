@@ -110,46 +110,41 @@ public class Engine extends Observable {
 		while(running && (System.currentTimeMillis() - start_run) < 45000){
 			
 			if(id_strat == 0){
-				System.out.println("Strat 0");
-				//left_motor.setSpeed(225);
-				//right_motor.setSpeed(225);
+
 				go();
-				//System.out.println(left_motor.getSpeed() + " " + right_motor.getSpeed());
 				Delay.msDelay(1000);
 				s = sensor.fetch(SensorType.COLOR_SENSOR);
 				
-				// On est perdu, donc on avance bêtement
+				// We are lost, so let's go 
 				while(checker.isLinecColor(s)){
 					
 					go();
 					s = sensor.fetch(SensorType.COLOR_SENSOR);
 				}
 				
-				/* 	On retrouve notre chemin en enregistrant
-				 *  l'endroit où est situé le fond */
+
 				leftCorrection();
-				//stop();
 				Delay.msDelay(delay);
 				bg_right = true;
 				id_strat = 1;
 			}
 
 			
-			System.out.println("Strat 1");
+			// Follow the border
 			s = sensor.fetch(SensorType.COLOR_SENSOR);
 			
 			while(checker.isBorder(s)){
-				//System.out.println("Border");
+
 				go();
 				s = sensor.fetch(SensorType.COLOR_SENSOR);
 			}
 			
 			if(checker.isLinecColor(s)){
-				//System.out.println("Line -> Border");
+
 				fromLineToBorder();
 
 			} else if (checker.isBgcColor(s)) {
-				//System.out.println("Bg -> Border");
+
 				fromBackgroundToBorder();
 
 			/*} else if (checker.isHalfTurncColor(s)) {
@@ -164,50 +159,35 @@ public class Engine extends Observable {
 			} else if (checker.isStopcColor(s) || checker.isHalfTurncColor(s)) {
 				
 				if(half_turn_done){
-					
-					stop();
-					Sound.setVolume(8);
-					Sound.beep(); 
-					Delay.msDelay(250); 
-					Sound.beep();
-					Delay.msDelay(250); 
-					Sound.beep();
-					Delay.msDelay(250); 
-					Sound.beep();
-					Sound.setVolume(0);
 					running = false;
 				}
 			}
 		}
 
 		stop();
+		Sound.setVolume(8);
+		Sound.beep(); 
+		Delay.msDelay(250); 
+		Sound.beep();
+		Delay.msDelay(250); 
+		Sound.beep();
+		Delay.msDelay(250); 
+		Sound.beep();
+		Sound.setVolume(0);
 	}
 	
 	
-	// Revenir vers la gauche
+	// Go back to the left
 	private void leftCorrection() throws Exception{
 		
 		int sp = speed/2;
 		float [] s = sensor.fetch(SensorType.COLOR_SENSOR); 
-		
+
 		left_motor.setSpeed(sp);
 		update();
-		
-		//Stopwatch timer = new Stopwatch();
-		
-		System.out.println("TO left");
-		
+
 		while(!checker.isBorder(s)){
-			
-			/*if(timer.elapsed() > SECOND){
-				sp--;
-				left_motor.setSpeed(sp);
-				update();
-			}*/
-			
-			//right_motor.rotate(angle_rotate,true);
-			//left_motor.rotate(angle_rotate,true);
-			
+
 			s = sensor.fetch(SensorType.COLOR_SENSOR);
 		}
 		
@@ -215,30 +195,17 @@ public class Engine extends Observable {
 		update();
 	}
 	
-	// Revenir vers la droite
+	// Go back to the right
 	private void rightCorrection() throws Exception{
 		
 		int sp = speed/2;
 		float [] s = sensor.fetch(SensorType.COLOR_SENSOR); 
-		
-		System.out.println("TO right");
-		
+
 		right_motor.setSpeed(sp);
 		update();
-		
-		//Stopwatch timer = new Stopwatch();
-		
+
 		while(!checker.isBorder(s)){
-			
-			/*if(timer.elapsed() > SECOND){
-				sp--;
-				left_motor.setSpeed(sp);
-				update();
-			}*/
-			
-			//right_motor.rotate(angle_rotate,true);
-			//left_motor.rotate(angle_rotate,true);
-			
+
 			s = sensor.fetch(SensorType.COLOR_SENSOR);
 		}
 		
@@ -247,23 +214,23 @@ public class Engine extends Observable {
 	}	
 	
 	
-	// On est dans la ligne et on veut revenir au bord
+	// We need to go on the background because we are in the line
 	private void fromLineToBorder() throws Exception{
 		
 		if(bg_right){
 			
-			// Fond à droite, donc le bord est à droite
+			// The background is on our right 
 			rightCorrection();
 
 		} else {
 
-			// Sinon c'est que le bord est à gauche
+			// Otherwise it is on our left
 			leftCorrection();
 		}
 	}
 	
 	
-	// On est dans le fond et on veut revenir au bord
+	// We need to go on theline because we are in the background
 	private void fromBackgroundToBorder() throws Exception{
 		
 		if(bg_right){

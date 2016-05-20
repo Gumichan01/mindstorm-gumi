@@ -11,7 +11,6 @@ public class TestEngine extends Engine{
 	private static final long RTURN_DELAY = 1500L;
 	private static final long LTURN_DELAY = 3000L;
 	private static final int DEFAULT_SPEED = 360;
-	private static final int HT_SPEED = 255;
 	
 	public TestEngine() throws IOException {
 		super();
@@ -45,10 +44,8 @@ public class TestEngine extends Engine{
 		setSpeed(DEFAULT_SPEED,DEFAULT_SPEED);
 		while(System.currentTimeMillis() - ref_time < LINE_DELAY);
 		
-		//setSpeed(HT_SPEED,HT_SPEED);
 		halfTurn();
 		stop();
-		//end_time = System.currentTimeMillis();
 	}
 	
 }
