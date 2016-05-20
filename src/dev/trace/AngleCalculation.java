@@ -8,10 +8,12 @@ public class AngleCalculation {
 	private static final int PI_2 = 360;
 	private static final float L = 0.1438f;				// meter
 	
-	ArrayList<Float> theta_list;
+	private ArrayList<Float> radius_list;
+	private ArrayList<Float> theta_list;
 	
 	public AngleCalculation(){
 		
+		radius_list = new ArrayList<>();
 		theta_list = new ArrayList<>();
 	}
 	
@@ -34,6 +36,8 @@ public class AngleCalculation {
 			}
 
 			float theta = (darray[0] - darray[1]) / L;
+			float rad = Math.abs((darray[0] + darray[1]) / 2*theta);
+			radius_list.add(rad);
 			theta_list.add(theta);
 		}
 	}
@@ -46,6 +50,13 @@ public class AngleCalculation {
 		for(float f : theta_list){
 			
 			s += Float.toString(f) + " | ";
+		}
+
+		s += "\n";
+		
+		for(float r : radius_list){
+			
+			s += Float.toString(r) + " | ";
 		}
 		
 		return s;
