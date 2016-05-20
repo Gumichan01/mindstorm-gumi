@@ -7,7 +7,6 @@ public class AngleCalculation {
 	private static final float DISTANCE_2PI = 0.17165f;	// meter
 	private static final int PI_2 = 360;
 	private static final float L = 0.1438f;				// meter
-	
 	private ArrayList<TrigoCoord> coordinates;
 	
 	public AngleCalculation(){
@@ -35,7 +34,7 @@ public class AngleCalculation {
 			float theta = (darray[0] - darray[1]) / L;
 			float rad = Math.abs((darray[0] + darray[1]) / 2*theta);
 			
-			coordinates.add(new TrigoCoord(rad, theta));
+			coordinates.add(new TrigoCoord(rad, theta, rl.get(i).getTime()));
 		}
 	}
 	
@@ -51,5 +50,4 @@ public class AngleCalculation {
 		
 		return s;
 	}
-	
 }
