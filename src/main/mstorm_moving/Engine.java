@@ -10,7 +10,6 @@ import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.robotics.RegulatedMotor;
 import lejos.utility.Delay;
-import lejos.utility.Stopwatch;
 import main.mstorm_colorcheck.ColorChecker;
 import main.mstorm_sensor.LightAndColorSensor;
 import main.mstorm_sensor.SensorType;
@@ -35,6 +34,7 @@ public class Engine extends Observable {
 	private boolean bg_right;			// Indique si le fond est à droite du robot
 	private boolean half_turn_done;
 	private boolean running;
+	private long start_run;
 	
 	
 	public Engine() throws IOException{
@@ -47,7 +47,7 @@ public class Engine extends Observable {
 		
 		id_strat = 0;
 		bg_right = false;
-		half_turn_done = false;
+		half_turn_done = true;
 		half_turning = false;
 		running = false;
 		observer = null;
@@ -57,7 +57,6 @@ public class Engine extends Observable {
 		
 		this();
 		observer = obs;
-		setSpeed(0, 0);
 	}
 	
 
@@ -101,16 +100,21 @@ public class Engine extends Observable {
 		
 		final long delay = SECOND/DPS;
 		
+		System.out.println("START");
 		// Dump measure
 		sensor.fetch(SensorType.COLOR_SENSOR);
 		float [] s = sensor.fetch(SensorType.COLOR_SENSOR);
 		running = true;
+		start_run = System.currentTimeMillis();
 
-		while(running){
+		while(running && (System.currentTimeMillis() - start_run) < 45000){
 			
 			if(id_strat == 0){
-				
+				System.out.println("Strat 0");
+				//left_motor.setSpeed(225);
+				//right_motor.setSpeed(225);
 				go();
+				//System.out.println(left_motor.getSpeed() + " " + right_motor.getSpeed());
 				Delay.msDelay(1000);
 				s = sensor.fetch(SensorType.COLOR_SENSOR);
 				
@@ -124,35 +128,40 @@ public class Engine extends Observable {
 				/* 	On retrouve notre chemin en enregistrant
 				 *  l'endroit où est situé le fond */
 				leftCorrection();
-				stop();
+				//stop();
 				Delay.msDelay(delay);
 				bg_right = true;
 				id_strat = 1;
 			}
+
 			
+			System.out.println("Strat 1");
 			s = sensor.fetch(SensorType.COLOR_SENSOR);
 			
 			while(checker.isBorder(s)){
-				
+				//System.out.println("Border");
 				go();
 				s = sensor.fetch(SensorType.COLOR_SENSOR);
 			}
 			
 			if(checker.isLinecColor(s)){
+				//System.out.println("Line -> Border");
 				fromLineToBorder();
 
 			} else if (checker.isBgcColor(s)) {
+				//System.out.println("Bg -> Border");
 				fromBackgroundToBorder();
 
-			} else if (checker.isHalfTurncColor(s)) {
+			/*} else if (checker.isHalfTurncColor(s)) {
 				
-				halfTurn();
+				//System.out.println("HT");
+				/*halfTurn();
 				id_strat = 0;
 				sensor.fetch(SensorType.COLOR_SENSOR);
 				s = sensor.fetch(SensorType.COLOR_SENSOR);
-				continue;
+				continue;*/
 				
-			} else if (checker.isStopcColor(s)) {
+			} else if (checker.isStopcColor(s) || checker.isHalfTurncColor(s)) {
 				
 				if(half_turn_done){
 					
@@ -172,7 +181,6 @@ public class Engine extends Observable {
 		}
 
 		stop();
-		sensor.close();
 	}
 	
 	
@@ -185,15 +193,17 @@ public class Engine extends Observable {
 		left_motor.setSpeed(sp);
 		update();
 		
-		Stopwatch timer = new Stopwatch();
+		//Stopwatch timer = new Stopwatch();
+		
+		System.out.println("TO left");
 		
 		while(!checker.isBorder(s)){
 			
-			if(timer.elapsed() > SECOND){
+			/*if(timer.elapsed() > SECOND){
 				sp--;
 				left_motor.setSpeed(sp);
 				update();
-			}
+			}*/
 			
 			//right_motor.rotate(angle_rotate,true);
 			//left_motor.rotate(angle_rotate,true);
@@ -211,18 +221,20 @@ public class Engine extends Observable {
 		int sp = speed/2;
 		float [] s = sensor.fetch(SensorType.COLOR_SENSOR); 
 		
+		System.out.println("TO right");
+		
 		right_motor.setSpeed(sp);
 		update();
 		
-		Stopwatch timer = new Stopwatch();
+		//Stopwatch timer = new Stopwatch();
 		
 		while(!checker.isBorder(s)){
 			
-			if(timer.elapsed() > SECOND){
+			/*if(timer.elapsed() > SECOND){
 				sp--;
 				left_motor.setSpeed(sp);
 				update();
-			}
+			}*/
 			
 			//right_motor.rotate(angle_rotate,true);
 			//left_motor.rotate(angle_rotate,true);
