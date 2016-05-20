@@ -269,7 +269,7 @@ et *Dd* la distance parcourue par la roue droite.
 on a :
 
     Dg = r.Θ    // r est le rayon du point de référence
-    Dd = (r - L). - Θ
+    Dd = (r - L).Θ
 
 Donc on a :
 
