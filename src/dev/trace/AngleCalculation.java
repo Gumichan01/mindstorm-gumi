@@ -42,10 +42,15 @@ public class AngleCalculation {
 	public String toString(){
 		
 		String s = "| ";
+		int i = 0;
 		
 		for(TrigoCoord coord : coordinates){
 			
 			s += coord.toString() + " | ";
+			i++;
+			
+			if(i%4 == 0)
+				s += "\n| ";
 		}
 		
 		return s;
