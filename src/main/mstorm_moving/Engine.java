@@ -239,7 +239,6 @@ public class Engine extends Observable {
 		int sp = speed/2;
 		float [] s = sensor.fetch(SensorType.COLOR_SENSOR);
 
-		System.out.println(" -> RIGHT");
 		right_motor.setSpeed(sp);
 		update();
 		Stopwatch timer = new Stopwatch();
