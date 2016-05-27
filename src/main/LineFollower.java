@@ -5,7 +5,7 @@ import main.mstorm_moving.Engine;
 
 public class LineFollower {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 		Engine engine = null;
 		
@@ -16,9 +16,12 @@ public class LineFollower {
 		}catch(Exception ie){
 			
 			ie.printStackTrace();
+			throw ie;
 		
 		} finally{
-			engine.close();
+			
+			if(engine != null)
+				engine.close();
 		}
 		
 	}
