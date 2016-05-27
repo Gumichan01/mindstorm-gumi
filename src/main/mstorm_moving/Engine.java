@@ -113,7 +113,7 @@ public class Engine extends Observable {
 		running = true;
 		start_run = System.currentTimeMillis();
 
-		while(running && (System.currentTimeMillis() - start_run) < 45000){
+		while(running && (System.currentTimeMillis() - start_run) < 90000){
 			
 			if(id_strat == 0){
 
@@ -188,11 +188,8 @@ public class Engine extends Observable {
 				update();
 			}
 			
-			// In every cases, check if the stop color is detected
-			if (checker.isStopcColor(s)) {
-				
-				running = false;
-			}
+			if (checker.isStopcColor(s))
+					running = false;
 		}
 
 		stop();
@@ -219,8 +216,7 @@ public class Engine extends Observable {
 
 		Stopwatch timer = new Stopwatch();
 		
-		while(!checker.isBorder(s) || !checker.isStopcColor(s) 
-				|| !checker.isBlackColor(s)){
+		while(!checker.isBorder(s) || !checker.isBlackColor(s)){
 
 			if(timer.elapsed() > CORRECT_TIME){
 				sp -= 2;
@@ -246,8 +242,7 @@ public class Engine extends Observable {
 		update();
 		Stopwatch timer = new Stopwatch();
 		
-		while(!checker.isBorder(s) || !checker.isStopcColor(s) 
-				|| !checker.isBlackColor(s)){
+		while(!checker.isBorder(s) || !checker.isBlackColor(s)){
 
 			if(timer.elapsed() > CORRECT_TIME){
 				sp -= 2;
