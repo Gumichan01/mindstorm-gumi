@@ -6,6 +6,7 @@ import java.util.Observer;
 
 import lejos.hardware.Sound;
 import lejos.hardware.ev3.LocalEV3;
+import lejos.hardware.lcd.LCD;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.robotics.RegulatedMotor;
@@ -175,6 +176,8 @@ public class Engine extends Observable {
 				else if(id_path == 1)
 					id_path = 2;
 
+				System.out.println("BLACK is detected");
+				
 				right_motor.setSpeed(speed/2);
 				update();
 			
@@ -185,6 +188,8 @@ public class Engine extends Observable {
 				else if(id_path == 3)
 					id_path = 2;
 
+				System.out.println("BLUE is detected");
+				
 				right_motor.setSpeed(speed/2);
 				update();
 			}
@@ -214,10 +219,11 @@ public class Engine extends Observable {
 
 		Stopwatch timer = new Stopwatch();
 		
-		while(!checker.isBorder(s)){
+		while(!checker.isBorder(s) || !checker.isStopcColor(s) 
+				|| !checker.isBlackColor(s)){
 
 			if(timer.elapsed() > CORRECT_TIME){
-				sp--;
+				sp -= 2;
 				left_motor.setSpeed(sp);
 				update();
 				timer = new Stopwatch();
@@ -234,16 +240,17 @@ public class Engine extends Observable {
 	private void rightCorrection() throws Exception{
 		
 		int sp = speed/2;
-		float [] s = sensor.fetch(SensorType.COLOR_SENSOR); 
+		float [] s = sensor.fetch(SensorType.COLOR_SENSOR);
 
 		right_motor.setSpeed(sp);
 		update();
 		Stopwatch timer = new Stopwatch();
 		
-		while(!checker.isBorder(s)){
+		while(!checker.isBorder(s) || !checker.isStopcColor(s) 
+				|| !checker.isBlackColor(s)){
 
 			if(timer.elapsed() > CORRECT_TIME){
-				sp--;
+				sp -= 2;
 				right_motor.setSpeed(sp);
 				update();
 				timer = new Stopwatch();
