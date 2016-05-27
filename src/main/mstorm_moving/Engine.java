@@ -216,7 +216,8 @@ public class Engine extends Observable {
 
 		Stopwatch timer = new Stopwatch();
 		
-		while(!checker.isBorder(s) || !checker.isBlackColor(s)){
+		while(!checker.isBorder(s) && !checker.isBlackColor(s) 
+				&& !checker.isLinecColor(s)){
 
 			if(timer.elapsed() > CORRECT_TIME){
 				sp -= 2;
@@ -238,11 +239,12 @@ public class Engine extends Observable {
 		int sp = speed/2;
 		float [] s = sensor.fetch(SensorType.COLOR_SENSOR);
 
+		System.out.println(" -> RIGHT");
 		right_motor.setSpeed(sp);
 		update();
 		Stopwatch timer = new Stopwatch();
 		
-		while(!checker.isBorder(s) || !checker.isBlackColor(s)){
+		while(!checker.isBorder(s)){
 
 			if(timer.elapsed() > CORRECT_TIME){
 				sp -= 2;
