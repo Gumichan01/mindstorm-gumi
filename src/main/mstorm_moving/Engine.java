@@ -10,6 +10,7 @@ import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.robotics.RegulatedMotor;
 import lejos.utility.Delay;
+import lejos.utility.Stopwatch;
 import main.mstorm_colorcheck.ColorChecker;
 import main.mstorm_sensor.LightAndColorSensor;
 import main.mstorm_sensor.SensorType;
@@ -18,8 +19,9 @@ public class Engine extends Observable {
 	
 	public static boolean half_turning;
 	
-	protected final static long DPS = 60;			// Detection par seconde
+	protected final static long DPS = 60;
 	protected final static long SECOND = 1000;		// 1 seconde
+	protected final static long CORRECT_TIME = 50;
 	protected final static long TOTAL_DELAY = 30000;
 
 	protected final static int angle_rotate = 225;
@@ -35,13 +37,15 @@ public class Engine extends Observable {
 	private boolean half_turn_done;
 	private boolean running;
 	private long start_run;
+	private int id_path;
 	
 	
 	public Engine() throws IOException{
 		
+		checker = new ColorChecker();
 		sensor = new LightAndColorSensor(LocalEV3.get().
 				getPort(LightAndColorSensor.sensor_port));
-		checker = new ColorChecker();
+
 		left_motor = new EV3LargeRegulatedMotor(MotorPort.D);
 		right_motor = new EV3LargeRegulatedMotor(MotorPort.A);
 		
@@ -51,6 +55,7 @@ public class Engine extends Observable {
 		half_turning = false;
 		running = false;
 		observer = null;
+		id_path = 0;
 	}
 
 	public Engine(Observer obs) throws IOException{
@@ -147,27 +152,48 @@ public class Engine extends Observable {
 
 				fromBackgroundToBorder();
 
-			/*} else if (checker.isHalfTurncColor(s)) {
+			} else if (checker.isChoiceColor(s)) {
+
+				switch (id_path){
 				
-				//System.out.println("HT");
-				/*halfTurn();
-				id_strat = 0;
-				sensor.fetch(SensorType.COLOR_SENSOR);
-				s = sensor.fetch(SensorType.COLOR_SENSOR);
-				continue;*/
+				case 1 : break;				/* Go to the left */
+				case 2 : break;				/* Go ahead */
+				case 3 : default : break;	/* Go to the right */
 				
-			} else if (checker.isStopcColor(s) || checker.isHalfTurncColor(s)) {
+				}
+				
+			} else if (checker.isStopcColor(s)) {
 				
 				if(half_turn_done){
 					running = false;
 				}
+			
+			} else if(checker.isBlackColor(s)) {
+				
+				if(id_path == 0)
+					id_path = 3;
+				else if(id_path == 1)
+					id_path = 2;
+
+				right_motor.setSpeed(speed/2);
+				update();
+			
+			} else { // Blue color
+				
+				if(id_path == 0)
+					id_path = 1;
+				else if(id_path == 3)
+					id_path = 2;
+
+				right_motor.setSpeed(speed/2);
+				update();
 			}
 		}
 
 		stop();
 		Sound.setVolume(8);
 		Sound.beep(); 
-		Delay.msDelay(250); 
+		Delay.msDelay(250);
 		Sound.beep();
 		Delay.msDelay(250); 
 		Sound.beep();
@@ -186,8 +212,17 @@ public class Engine extends Observable {
 		left_motor.setSpeed(sp);
 		update();
 
+		Stopwatch timer = new Stopwatch();
+		
 		while(!checker.isBorder(s)){
 
+			if(timer.elapsed() > CORRECT_TIME){
+				sp--;
+				left_motor.setSpeed(sp);
+				update();
+				timer = new Stopwatch();
+			}
+			
 			s = sensor.fetch(SensorType.COLOR_SENSOR);
 		}
 		
@@ -203,8 +238,16 @@ public class Engine extends Observable {
 
 		right_motor.setSpeed(sp);
 		update();
-
+		Stopwatch timer = new Stopwatch();
+		
 		while(!checker.isBorder(s)){
+
+			if(timer.elapsed() > CORRECT_TIME){
+				sp--;
+				right_motor.setSpeed(sp);
+				update();
+				timer = new Stopwatch();
+			}
 
 			s = sensor.fetch(SensorType.COLOR_SENSOR);
 		}
