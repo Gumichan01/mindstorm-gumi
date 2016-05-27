@@ -162,13 +162,7 @@ public class Engine extends Observable {
 				case 3 : default : break;	/* Go to the right */
 				
 				}
-				
-			} else if (checker.isStopcColor(s)) {
-				
-				if(half_turn_done){
-					running = false;
-				}
-			
+
 			} else if(checker.isBlackColor(s)) {
 				
 				if(id_path == 0)
@@ -192,6 +186,12 @@ public class Engine extends Observable {
 				
 				right_motor.setSpeed(speed/2);
 				update();
+			}
+			
+			// In every cases, check if the stop color is detected
+			if (checker.isStopcColor(s)) {
+				
+				running = false;
 			}
 		}
 
