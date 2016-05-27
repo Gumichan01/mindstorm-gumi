@@ -294,6 +294,8 @@ mais le résultat ne contredit pas la formule à prouver.
  - noir et bleu : 2 (millieu)
  - bleu : 1 (gauche)
 
+> Vidéo en ligne  
+> https://youtu.be/rEb1_ouhAFA
 
 ## Documentations ##
 
