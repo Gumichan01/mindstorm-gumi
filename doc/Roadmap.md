@@ -287,6 +287,13 @@ Donc, d'après la formule ①, on a:
 On retrouve bien *Θ* a droite. Oui, ce raisonnement est "bizarre",
 mais le résultat ne contredit pas la formule à prouver.
 
+**Mise à jour : 27 mai 2016**
+
+ Info sur les codes couleur:
+ - noir : 3 (droite)
+ - noir et bleu : 2 (millieu)
+ - bleu : 1 (gauche)
+
 
 ## Documentations ##
 
