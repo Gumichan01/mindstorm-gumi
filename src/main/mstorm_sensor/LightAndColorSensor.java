@@ -1,6 +1,5 @@
 package main.mstorm_sensor;
 
-
 import lejos.hardware.port.Port;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.robotics.SampleProvider;
@@ -20,7 +19,6 @@ public class LightAndColorSensor extends EV3ColorSensor {
 		light_provider = this.getAmbientMode();
 	}
 
-
 	// Get a value (RGB or Light) from the sensor
 	public float[] fetch(SensorType type) {
 
@@ -38,7 +36,7 @@ public class LightAndColorSensor extends EV3ColorSensor {
 	// Get a RGB value from the sensor
 	private float[] fetchColorSample() {
 
-		float [][] stock_array = new float[11][];
+		float[][] stock_array = new float[11][];
 		float[] sample = new float[color_provider.sampleSize()];
 
 		for (int i = 0; i < 11; i++) {
@@ -46,12 +44,11 @@ public class LightAndColorSensor extends EV3ColorSensor {
 			stock_array[i] = sample;
 
 		}
-		
-		float [][] sorted_array = ColorChecker.insertionSort(stock_array);
-		
-		return sorted_array[sorted_array.length/2];
-	}
 
+		float[][] sorted_array = ColorChecker.insertionSort(stock_array);
+
+		return sorted_array[sorted_array.length / 2];
+	}
 
 	// Get an ambient light value from the sensor
 	private float[] fetchLightSample() {

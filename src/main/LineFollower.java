@@ -1,29 +1,30 @@
 package main;
 
-import dev.trace.RobotStatImpl;
+
 import main.mstorm_moving.Engine;
+import main.trace.RobotStatImpl;
 
 public class LineFollower {
-	
+
 	public static void main(String[] args) throws Exception {
-		
+
 		Engine engine = null;
-		
-		try{
+
+		try {
 			engine = new Engine(new RobotStatImpl());
 			engine.move();
-			
-		}catch(Exception ie){
-			
+
+		} catch (Exception ie) {
+
 			ie.printStackTrace();
 			throw ie;
-		
-		} finally{
-			
-			if(engine != null)
+
+		} finally {
+
+			if (engine != null)
 				engine.close();
 		}
-		
+
 	}
 
 }
